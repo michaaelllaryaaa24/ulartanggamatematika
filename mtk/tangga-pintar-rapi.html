@@ -1,0 +1,3565 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tangga Pintar SMA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       VARIABEL & RESET
+       ========================================================= */
+    :root {
+      --p: #4f46e5;
+      --ps: #eef2ff;
+      --pk: #e8387e;
+      --pks: #fdf2f8;
+      --bg: #f8fafc;
+      --tx: #1e293b;
+      --mu: #64748b;
+      --ln: #e8ecf4;
+      --ok: #059669;
+      --sh: 0 4px 20px rgba(30, 41, 59, .06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--tx);
+      font-size: 14px;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: 0;
+      background: none;
+      color: inherit;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--p);
+      outline-offset: 2px;
+    }
+
+    /* =========================================================
+       HEADER & NAVIGASI
+       ========================================================= */
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--ln);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .hd {
+      max-width: 1312px;
+      margin: auto;
+      padding: 0 20px;
+      height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 22px;
+    }
+
+    .logo i {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--p);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-style: normal;
+      font-size: 20px;
+    }
+
+    nav {
+      display: flex;
+      gap: 6px;
+    }
+
+    nav button {
+      padding: 12px 16px;
+      border-radius: 12px;
+      color: var(--mu);
+      font-weight: 500;
+    }
+
+    nav button.on {
+      background: var(--ps);
+      color: var(--p);
+      font-weight: 700;
+    }
+
+    nav button.locked {
+      opacity: .45;
+    }
+
+    nav button.locked::before {
+      content: " ";
+    }
+
+    .rt {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+    }
+
+    .pts {
+      background: #fef6dc;
+      color: #8a6200;
+      font-weight: 700;
+      padding: 9px 14px;
+      border-radius: 99px;
+    }
+
+    .av {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--pks);
+      color: var(--pk);
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+    }
+
+    .dd {
+      position: absolute;
+      right: 0;
+      top: 50px;
+      background: #fff;
+      border: 1px solid var(--ln);
+      border-radius: 14px;
+      box-shadow: var(--sh);
+      padding: 6px;
+      display: none;
+      min-width: 180px;
+    }
+
+    .dd.show {
+      display: block;
+    }
+
+    .dd div {
+      padding: 10px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .dd div:hover {
+      background: var(--ps);
+    }
+
+    /* =========================================================
+       LAYOUT UMUM
+       ========================================================= */
+    main {
+      max-width: 1312px;
+      margin: auto;
+      padding: 32px 20px 24px;
+    }
+
+    .pg {
+      display: none;
+    }
+
+    .pg.on {
+      display: block;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+      gap: 12px;
+    }
+
+    .eb {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--p);
+      letter-spacing: .02em;
+    }
+
+    h1 {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      margin: 8px 0 6px;
+    }
+
+    h3 {
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .sub {
+      color: var(--mu);
+    }
+
+    .btn {
+      background: #fff;
+      border: 1px solid var(--ln);
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: 700;
+      color: var(--p);
+      white-space: nowrap;
+    }
+
+    .btn.pr {
+      background: var(--p);
+      color: #fff;
+      border-color: var(--p);
+    }
+
+    .btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: var(--sh);
+      border: 1px solid var(--ln);
+      padding: 24px;
+    }
+
+    .bd {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 99px;
+      background: var(--ps);
+      color: var(--p);
+      margin-right: 6px;
+    }
+
+    .bd.g {
+      background: #e3f7ee;
+      color: var(--ok);
+    }
+
+    .tag {
+      background: var(--pks);
+      color: var(--pk);
+      font-weight: 700;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+
+    .tg {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--tx);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      opacity: 0;
+      transition: .3s;
+      pointer-events: none;
+      z-index: 60;
+    }
+
+    .tg.show {
+      opacity: 1;
+    }
+
+    footer {
+      max-width: 1312px;
+      margin: auto;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--mu);
+      font-size: 12px;
+    }
+
+    footer button {
+      color: var(--mu);
+      font-size: 12px;
+      margin-left: 20px;
+    }
+
+    footer button:hover {
+      color: var(--p);
+    }
+
+    /* =========================================================
+       HALAMAN PERMAINAN
+       ========================================================= */
+    .g2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 440px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .col {
+      display: grid;
+      gap: 16px;
+    }
+
+    /* Papan */
+    .bw {
+      position: relative;
+      margin: 20px auto 12px;
+      max-width: 640px;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      aspect-ratio: 1;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--ln);
+    }
+
+    .cl {
+      font-weight: 700;
+      color: #6b7390;
+      font-size: 13px;
+      padding: 6px 7px;
+      background: #f8faff;
+    }
+
+    .cl.alt {
+      background: #eef2ff;
+    }
+
+    .cl.st {
+      background: #fdeef3;
+      color: var(--pk);
+    }
+
+    .cl.fin {
+      background: var(--p);
+      color: #fff;
+    }
+
+    .cl small {
+      display: block;
+      font-size: 8px;
+    }
+
+    .ov {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .pc {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      color: #fff;
+      font-weight: 800;
+      font-size: 12px;
+      display: grid;
+      place-items: center;
+      border: 2.5px solid #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+      transform: translate(-50%, -50%);
+      transition: left .17s, top .17s;
+      z-index: 3;
+    }
+
+    .lg {
+      display: flex;
+      justify-content: space-between;
+      color: var(--mu);
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .log {
+      background: #e9f8f1;
+      color: #0a7a54;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-weight: 600;
+      margin-top: 16px;
+      font-size: 13px;
+    }
+
+    /* Kartu giliran & dadu */
+    .turn {
+      background: var(--p);
+      color: #fff;
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .turn .r {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      opacity: .8;
+    }
+
+    .turn h2 {
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .dr {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin: 16px 0;
+    }
+
+    .rb {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .18);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .rb:disabled {
+      opacity: .8;
+      cursor: default;
+    }
+
+    .rb.act {
+      background: #fff;
+      color: var(--p);
+    }
+
+    .dsc {
+      width: 68px;
+      height: 68px;
+      perspective: 400px;
+      flex: none;
+    }
+
+    .cube {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1.05s cubic-bezier(.22, .9, .3, 1.15);
+    }
+
+    .fc {
+      position: absolute;
+      width: 68px;
+      height: 68px;
+      background: #fff;
+      border: 2px solid #e0e3f5;
+      border-radius: 14px;
+      display: grid;
+      grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+      padding: 10px;
+      box-sizing: border-box;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, .08);
+    }
+
+    .fc i {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--p);
+      place-self: center;
+    }
+
+    .fc.a i {
+      background: var(--pk);
+      width: 16px;
+      height: 16px;
+    }
+
+    .f1 { transform: rotateY(0) translateZ(34px); }
+    .f6 { transform: rotateY(180deg) translateZ(34px); }
+    .f2 { transform: rotateY(-90deg) translateZ(34px); }
+    .f5 { transform: rotateY(90deg) translateZ(34px); }
+    .f3 { transform: rotateX(90deg) translateZ(34px); }
+    .f4 { transform: rotateX(-90deg) translateZ(34px); }
+
+    /* Kartu tantangan */
+    .eq {
+      background: #eff3ff;
+      border-radius: 14px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--p);
+      padding: 18px;
+      margin: 14px 0;
+    }
+
+    .op {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      text-align: left;
+      border: 1.5px solid var(--ln);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      background: #fff;
+    }
+
+    .op span.k {
+      font-size: 11px;
+      color: var(--mu);
+      width: 14px;
+    }
+
+    .op i {
+      margin-left: auto;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1.5px solid #cbd5e1;
+    }
+
+    .op.s {
+      border-color: var(--p);
+      background: var(--ps);
+    }
+
+    .op.s i {
+      border: 5px solid var(--p);
+    }
+
+    .op.good {
+      border-color: var(--ok);
+      background: #e9f8f1;
+    }
+
+    .op.bad {
+      border-color: var(--pk);
+      background: var(--pks);
+    }
+
+    .fb {
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      margin: 8px 0;
+      font-size: 13px;
+    }
+
+    .fb.good {
+      background: #e9f8f1;
+      color: #0a7a54;
+    }
+
+    .fb.bad {
+      background: var(--pks);
+      color: var(--pk);
+    }
+
+    .qh {
+      font-size: 12px;
+      color: var(--mu);
+      margin: 10px 0 0;
+      line-height: 1.5;
+    }
+
+    .lk {
+      color: var(--p);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      text-align: center;
+      margin-top: 14px;
+      display: block;
+      width: 100%;
+    }
+
+    /* Daftar pemain */
+    .pl {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      margin-top: 8px;
+    }
+
+    .pl.me {
+      background: var(--ps);
+    }
+
+    .pl .pc {
+      position: static;
+      transform: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    .pl b.n {
+      margin-left: auto;
+      font-size: 22px;
+    }
+
+    /* Pecahan bersusun */
+    .fr {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      line-height: 1.1;
+      font-size: .75em;
+      margin: 0 2px;
+      white-space: nowrap;
+    }
+
+    .fr b {
+      border-bottom: 1.6px solid currentColor;
+      padding: 0 3px;
+    }
+
+    .fr i {
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       MODAL & PENGATURAN PEMAIN
+       ========================================================= */
+    .mo {
+      position: fixed;
+      inset: 0;
+      background: rgba(30, 41, 59, .5);
+      display: none;
+      place-items: center;
+      z-index: 50;
+      padding: 20px;
+    }
+
+    .mo.show {
+      display: grid;
+    }
+
+    .mo .card {
+      max-width: 480px;
+      width: 100%;
+    }
+
+    .mo li {
+      margin: 8px 0 8px 18px;
+      color: var(--mu);
+      line-height: 1.5;
+    }
+
+    .seg {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .seg button {
+      flex: 1;
+      padding: 10px;
+      border: 1.5px solid var(--ln);
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .seg button.on {
+      border-color: var(--p);
+      background: var(--ps);
+      color: var(--p);
+    }
+
+    #ni label {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    #ni label span {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      flex: none;
+    }
+
+    #ni input {
+      flex: 1;
+      padding: 12px 14px;
+      border: 1.5px solid var(--ln);
+      border-radius: 10px;
+      font: inherit;
+    }
+
+    /* =========================================================
+       HALAMAN AI STUDY ASSISTANT
+       ========================================================= */
+    .g3 {
+      display: grid;
+      grid-template-columns: 272px minmax(0, 1fr) 320px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .sb h3 {
+      margin-bottom: 14px;
+    }
+
+    .in {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      background: var(--bg);
+      border: 1px solid var(--ln);
+      border-radius: 12px;
+      padding: 0 12px;
+      margin-bottom: 18px;
+    }
+
+    .in input {
+      border: 0;
+      background: none;
+      padding: 13px 0;
+      width: 100%;
+      font: inherit;
+      outline: 0;
+    }
+
+    .sl {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--mu);
+      margin: 14px 0 8px;
+    }
+
+    .tp {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 12px;
+      border-radius: 10px;
+      color: var(--mu);
+      font-weight: 500;
+    }
+
+    .tp.on {
+      background: var(--ps);
+      color: var(--p);
+      font-weight: 700;
+    }
+
+    .qp {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .qp:hover {
+      background: var(--ps);
+    }
+
+    /* Jendela chat */
+    .ch {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 820px;
+    }
+
+    .chh {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--ln);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chh i,
+    .bot {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--p);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-style: normal;
+    }
+
+    .chh small {
+      color: var(--mu);
+    }
+
+    .chh small:before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ok);
+      margin-right: 6px;
+    }
+
+    .ms {
+      flex: 1;
+      overflow: auto;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .m {
+      display: flex;
+      gap: 12px;
+      max-width: 100%;
+    }
+
+    .m.u {
+      justify-content: flex-end;
+    }
+
+    .m .bot {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      flex: none;
+      font-size: 14px;
+    }
+
+    .bb {
+      line-height: 1.6;
+    }
+
+    .m.u .bb {
+      background: var(--p);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 14px;
+      max-width: 80%;
+    }
+
+    .stp {
+      background: var(--ps);
+      border-radius: 14px;
+      padding: 16px;
+      margin: 12px 0;
+    }
+
+    .stp>div {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .stp>div:last-child {
+      margin: 0;
+    }
+
+    .stp em {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--p);
+      font-style: normal;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+      flex: none;
+      font-size: 12px;
+    }
+
+    .stp span {
+      color: var(--mu);
+      font-size: 13px;
+      display: block;
+    }
+
+    .ty {
+      display: flex;
+      gap: 4px;
+      padding: 8px;
+    }
+
+    .ty i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #b5b9d6;
+      animation: b 1s infinite;
+    }
+
+    .ty i:nth-child(2) {
+      animation-delay: .15s;
+    }
+
+    .ty i:nth-child(3) {
+      animation-delay: .3s;
+    }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      padding: 0 24px 12px;
+      flex-wrap: wrap;
+    }
+
+    .chips button {
+      background: var(--ps);
+      color: var(--p);
+      font-weight: 700;
+      font-size: 12px;
+      padding: 8px 12px;
+      border-radius: 99px;
+    }
+
+    .cb {
+      margin: 0 24px 8px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid var(--ln);
+      border-radius: 14px;
+      padding: 8px 8px 8px 14px;
+    }
+
+    .cb textarea {
+      flex: 1;
+      border: 0;
+      resize: none;
+      font: inherit;
+      outline: 0;
+      height: 24px;
+      padding: 0;
+    }
+
+    .sd {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--p);
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .ft {
+      text-align: center;
+      color: var(--mu);
+      font-size: 11px;
+      padding-bottom: 14px;
+    }
+
+    /* Kartu rekomendasi materi */
+    .rc {
+      border: 1px solid var(--ln);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 12px;
+      cursor: pointer;
+      background: #fff;
+    }
+
+    .rc:hover {
+      box-shadow: var(--sh);
+    }
+
+    .rc .h {
+      padding: 22px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--p);
+      background: var(--ps);
+    }
+
+    .rc .h.pk {
+      background: var(--pks);
+      color: var(--pk);
+    }
+
+    .rc .b {
+      padding: 14px 16px;
+    }
+
+    .rc small {
+      color: var(--mu);
+      font-size: 11px;
+    }
+
+    .rc .t {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--p);
+    }
+
+    .mot {
+      background: var(--ps);
+      border-radius: 20px;
+      padding: 20px;
+      margin-top: 16px;
+      color: var(--p);
+    }
+
+    .mot p {
+      color: #5a52c9;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    /* =========================================================
+       HALAMAN RANGKUMAN MATERI
+       ========================================================= */
+    .sts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stc {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .stc i {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--ps);
+      display: grid;
+      place-items: center;
+      font-style: normal;
+      font-size: 20px;
+    }
+
+    .stc b {
+      font-size: 22px;
+    }
+
+    .stc small {
+      color: var(--mu);
+      display: block;
+    }
+
+    .g4 {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .pb {
+      height: 6px;
+      border-radius: 9px;
+      background: #e3e7f5;
+      margin: 8px 0 16px;
+      overflow: hidden;
+    }
+
+    .pb i {
+      display: block;
+      height: 100%;
+      background: var(--p);
+      transition: width .4s;
+    }
+
+    .tc {
+      border: 1px solid var(--ln);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+
+    .tc.on {
+      background: var(--ps);
+      border-color: #d9dcf9;
+    }
+
+    .tc small {
+      color: var(--mu);
+      display: block;
+      font-weight: 400;
+    }
+
+    .tc b {
+      font-weight: 700;
+    }
+
+    .sm {
+      padding: 8px 12px;
+      font-size: 12px;
+      border-radius: 8px;
+      display: block;
+      width: 100%;
+      text-align: left;
+      margin-top: 4px;
+      color: var(--mu);
+    }
+
+    .sm.on {
+      background: #fff;
+      color: var(--p);
+      font-weight: 700;
+    }
+
+    .promo {
+      background: var(--pks);
+      border-radius: 16px;
+      padding: 18px;
+      margin-top: 16px;
+    }
+
+    .promo a {
+      color: var(--pk);
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 28px;
+      border-bottom: 1px solid var(--ln);
+      margin: 22px -24px 0;
+      padding: 0 24px;
+    }
+
+    .tabs button {
+      padding: 14px 0;
+      color: var(--mu);
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tabs button.on {
+      color: var(--p);
+      font-weight: 700;
+      border-color: var(--p);
+    }
+
+    .cg {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 28px;
+      padding-top: 24px;
+    }
+
+    .sec {
+      margin-bottom: 26px;
+    }
+
+    .sec h4 {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .sec h4 em {
+      background: var(--ps);
+      color: var(--p);
+      font-style: normal;
+      font-size: 11px;
+      padding: 6px 8px;
+      border-radius: 8px;
+      margin-right: 10px;
+    }
+
+    .sec p {
+      color: var(--mu);
+      line-height: 1.6;
+    }
+
+    .fm {
+      background: var(--ps);
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 12px;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--p);
+      line-height: 1.7;
+    }
+
+    .ex {
+      border: 1px solid var(--ln);
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 14px;
+      line-height: 1.9;
+      color: var(--mu);
+    }
+
+    .ex b {
+      color: var(--tx);
+    }
+
+    .wr {
+      background: #fef7dc;
+      border-radius: 16px;
+      padding: 18px;
+      margin: 16px 0;
+      color: #8a6200;
+      line-height: 1.55;
+      font-size: 13px;
+    }
+
+    .wr b {
+      display: block;
+      color: var(--tx);
+      margin-bottom: 6px;
+    }
+
+    .qz {
+      border: 1px solid #d9dcf9;
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .qz .e {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--p);
+      margin: 8px 0;
+      line-height: 1.4;
+    }
+
+    .qo {
+      display: flex;
+      gap: 8px;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+
+    .qo button {
+      flex: 1;
+      border: 1px solid var(--ln);
+      border-radius: 10px;
+      padding: 10px 8px;
+      font-weight: 700;
+    }
+
+    .qo button.s {
+      border-color: var(--p);
+      background: var(--ps);
+    }
+
+    .qo button.good {
+      background: #e3f7ee;
+      border-color: var(--ok);
+    }
+
+    .qo button.bad {
+      background: var(--pks);
+      border-color: var(--pk);
+    }
+
+    .chk {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      background: var(--ps);
+      color: var(--p);
+      font-weight: 700;
+    }
+
+    .bt {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--ln);
+      margin: 0 -24px -24px;
+      padding: 20px 24px;
+    }
+
+    /* =========================================================
+       ANIMASI & INTERAKSI
+       ========================================================= */
+    .ms {
+      scroll-behavior: smooth;
+    }
+
+    .m {
+      animation: pop .45s cubic-bezier(.2, .9, .3, 1.2) both;
+    }
+
+    .m:not(.u) .bb {
+      background: #fff;
+      border: 1px solid var(--ln);
+      border-radius: 16px;
+      border-top-left-radius: 4px;
+      padding: 12px 16px;
+      box-shadow: 0 2px 10px rgba(30, 41, 59, .04);
+    }
+
+    .m.u .bb {
+      border-bottom-right-radius: 4px;
+    }
+
+    .stp>div {
+      animation: rise .5s ease both;
+    }
+
+    .stp>div:nth-child(1) { animation-delay: .15s; }
+    .stp>div:nth-child(2) { animation-delay: .4s; }
+    .stp>div:nth-child(3) { animation-delay: .65s; }
+    .stp>div:nth-child(4) { animation-delay: .9s; }
+
+    .stp em {
+      animation: pop .5s both;
+    }
+
+    .bb b {
+      animation: fadeb .8s .5s both;
+    }
+
+    .ty {
+      background: var(--ps);
+      border-radius: 14px;
+      width: fit-content;
+      padding: 12px 14px;
+    }
+
+    .ty i {
+      background: var(--p);
+      opacity: .6;
+    }
+
+    /* Tampilan awal chat */
+    .em {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin: auto;
+      max-width: 460px;
+      animation: pop .6s both;
+    }
+
+    .em .orb {
+      width: 84px;
+      height: 84px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, var(--p), #8b5cf6);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 38px;
+      animation: flt 3s ease-in-out infinite;
+      box-shadow: 0 12px 30px rgba(79, 70, 229, .35);
+    }
+
+    .em h2 {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 20px 0 6px;
+    }
+
+    .em p {
+      color: var(--mu);
+      line-height: 1.6;
+    }
+
+    .em .sg {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 22px;
+      width: 100%;
+    }
+
+    .em .sg button {
+      background: var(--ps);
+      color: var(--p);
+      font-weight: 700;
+      font-size: 12.5px;
+      padding: 14px 12px;
+      border-radius: 14px;
+      text-align: left;
+      transition: .2s;
+      animation: rise .5s both;
+    }
+
+    .em .sg button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--sh);
+      background: #e0e7ff;
+    }
+
+    .chips button {
+      transition: .2s;
+      animation: pop .4s both;
+    }
+
+    .chips button:hover {
+      transform: translateY(-2px);
+      background: #e0e7ff;
+    }
+
+    .sd {
+      transition: .2s;
+    }
+
+    .sd:hover {
+      transform: scale(1.08) rotate(-8deg);
+    }
+
+    .sd:disabled {
+      opacity: .5;
+      cursor: wait;
+    }
+
+    .cb {
+      transition: .2s;
+    }
+
+    .cb:focus-within {
+      border-color: var(--p);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, .12);
+    }
+
+    .chh i {
+      transition: .3s;
+    }
+
+    .chh i.busy {
+      animation: flt 1.1s ease-in-out infinite;
+      box-shadow: 0 0 0 6px rgba(79, 70, 229, .15);
+    }
+
+    .chh small.t:before {
+      background: #f59e0b;
+      animation: blink 1s infinite;
+    }
+
+    .tp,
+    .qp,
+    .rc {
+      transition: .2s;
+    }
+
+    .qp:hover {
+      transform: translateX(4px);
+    }
+
+    .rc:hover {
+      transform: translateY(-3px);
+    }
+
+    .logo,
+    .pts,
+    .av {
+      cursor: pointer;
+    }
+
+    .pts:hover,
+    .av:hover {
+      filter: brightness(.96);
+    }
+
+    @keyframes b {
+      50% { transform: translateY(-4px); }
+    }
+
+    @keyframes pop {
+      from { opacity: 0; transform: translateY(14px) scale(.96); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateX(-14px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes fadeb {
+      from { opacity: .2; }
+      to { opacity: 1; }
+    }
+
+    @keyframes flt {
+      50% { transform: translateY(-8px) rotate(-4deg); }
+    }
+
+    @keyframes blink {
+      50% { opacity: .2; }
+    }
+
+    /* =========================================================
+       RESPONSIF & AKSESIBILITAS
+       ========================================================= */
+    @media (max-width: 1100px) {
+
+      .g3,
+      .g2,
+      .g4,
+      .cg {
+        grid-template-columns: 1fr;
+      }
+
+      .sts {
+        grid-template-columns: 1fr;
+      }
+
+      .hd {
+        height: auto;
+        padding: 12px 20px;
+        flex-wrap: wrap;
+      }
+
+      nav button {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+
+      .ch {
+        height: 680px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header>
+    <div class="hd">
+      <div class="logo"><i>▮▮▮</i>Tangga Pintar</div>
+
+      <nav>
+        <button data-p="game" class="on">Permainan</button>
+        <button data-p="ai">AI Study Assistant</button>
+        <button data-p="sum">Rangkuman Materi</button>
+      </nav>
+
+      <div class="rt">
+        <span class="pts"><span id="pts">240</span> poin</span>
+        <span class="av" id="av">NA</span>
+        <button id="ddb" aria-label="Menu profil">⌄</button>
+        <div class="dd" id="dd">
+          <div id="chp">✏️ Ganti pemain</div>
+          <div id="reset">🔄 Atur ulang permainan</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== HALAMAN: PERMAINAN ===================== -->
+    <section class="pg on" id="game">
+      <div class="top">
+        <div>
+          <div class="eb">BELAJAR SAMBIL BERMAIN</div>
+          <h1>Naik tangga, asah logika!</h1>
+          <p class="sub">Setiap langkah punya tantangan. Siap jadi yang pertama sampai ke petak 100?</p>
+        </div>
+        <button class="btn" id="how">❔ Cara bermain</button>
+      </div>
+
+      <div class="g2">
+        <!-- Papan -->
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <h3>Petualangan angka</h3>
+              <small class="sub">Kelas 10–12 · Fungsi, Kalkulus &amp; Statistika</small>
+            </div>
+            <span class="bd" id="rd">2 pemain · Putaran 6</span>
+          </div>
+
+          <div class="bw">
+            <div class="board" id="board"></div>
+            <svg class="ov" id="ov" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+            <div id="pcs"></div>
+          </div>
+
+          <div class="lg">
+            <span>↗ Tangga: naik lebih jauh &nbsp;&nbsp;<span style="color:var(--pk)">↘ Ular: turun, tetap semangat!</span></span>
+          </div>
+          <div class="log" id="log"></div>
+        </div>
+
+        <!-- Panel kanan -->
+        <div class="col">
+          <div class="card" style="padding:14px 20px;display:flex;justify-content:space-between;align-items:center">
+            <b>👥 Pemain</b>
+            <button class="btn" id="chg" style="padding:8px 14px">✏️ Ubah pemain</button>
+          </div>
+
+          <div class="turn">
+            <div class="r">
+              <b style="font-size:17px;opacity:1;color:#fff" id="tt"></b>
+              <span>PUTARAN <span id="rn">1</span></span>
+            </div>
+            <div class="dr">
+              <div class="dsc"><div class="cube" id="cube"></div></div>
+              <div>
+                <h2 id="ds"></h2>
+                <p style="font-size:12px;opacity:.85;margin-top:6px" id="dh"></p>
+              </div>
+            </div>
+            <button class="rb" id="roll">🎲 Lempar dadu</button>
+          </div>
+
+          <div class="card" id="qc"></div>
+
+          <div class="card" style="padding:18px">
+            <h3 style="font-size:14px">Pemain dalam arena</h3>
+            <div id="pls"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== HALAMAN: AI STUDY ASSISTANT ===================== -->
+    <section class="pg" id="ai">
+      <div class="top">
+        <div>
+          <div class="eb">TEMAN BELAJAR PERSONALMU</div>
+          <h1>Bingung? Kita cari tahu bareng.</h1>
+          <p class="sub">Tanya, pahami langkahnya, lalu coba sendiri. Matematika jadi lebih masuk akal.</p>
+        </div>
+        <button class="btn" id="nc">＋ Percakapan baru</button>
+      </div>
+
+      <div class="g3">
+        <!-- Sidebar kiri -->
+        <div class="card sb">
+          <h3>Mau belajar apa?</h3>
+          <div class="in">🔍<input id="ts" placeholder="Cari topik matematika..." /></div>
+
+          <div class="sl">JELAJAHI TOPIK</div>
+          <div id="tps"></div>
+
+          <hr style="border:0;border-top:1px solid var(--ln);margin:18px 0" />
+
+          <h3 style="font-size:14px;margin-bottom:12px">Mulai dari pertanyaan ini</h3>
+          <button class="qp">Bagaimana cara menurunkan 3x⁴ − 2x?</button>
+          <button class="qp">Apa itu teorema sisa pada suku banyak?</button>
+          <button class="qp">Bagaimana menentukan persamaan lingkaran?</button>
+
+          <div class="sl">PERCAKAPAN TERAKHIR</div>
+          <div id="hist" style="font-size:13px;color:var(--mu)">Belum ada percakapan.</div>
+        </div>
+
+        <!-- Chat -->
+        <div class="card ch">
+          <div class="chh">
+            <i>✨</i>
+            <div style="flex:1">
+              <h3>Asisten Pintar</h3>
+              <small>Siap menemani belajarmu</small>
+            </div>
+          </div>
+
+          <div class="ms" id="ms"></div>
+          <div class="chips" id="chips">
+            <button>Beri aku petunjuk</button>
+            <button>Coba soal lain</button>
+          </div>
+
+          <div class="cb">
+            <button title="Lampirkan foto" id="att">📎</button>
+            <textarea id="ci" placeholder="Tulis pertanyaan atau kirim foto soalmu..." rows="1"></textarea>
+            <button class="sd" id="sd" aria-label="Kirim">↑</button>
+          </div>
+          <div class="ft">AI bisa keliru. Cocokkan juga dengan materi dan penjelasan gurumu.</div>
+        </div>
+
+        <!-- Sidebar kanan -->
+        <div>
+          <div class="card" style="padding:20px">
+            <h3>Lanjut pahami materinya</h3>
+            <small class="sub">Pilih sesuai percakapanmu</small>
+
+            <div class="rc" data-go="sum" data-m="0">
+              <div class="h">f ∘ g ✨</div>
+              <div class="b">
+                <div class="t">RANGKUMAN MATERI</div>
+                <b>Fungsi komposisi</b><br />
+                <small>5 menit baca · 3 contoh</small>
+              </div>
+            </div>
+
+            <div class="rc" data-go="sum" data-m="6">
+              <div class="h pk">f′(x) ✨</div>
+              <div class="b">
+                <div class="t" style="color:var(--pk)">KONSEP DASAR</div>
+                <b>Mengenal turunan fungsi</b><br />
+                <small>4 menit baca · ilustrasi</small>
+              </div>
+            </div>
+
+            <div class="rc" data-go="sum" data-m="8">
+              <div class="h">∫ x² dx ✨</div>
+              <div class="b">
+                <div class="t">LATIHAN MANDIRI</div>
+                <b>Latihan integral polinom</b><br />
+                <small>8 soal · Tingkat sedang</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="mot">
+            <b>💡 Tidak apa-apa belum paham.</b>
+            <p>Belajar itu bukan soal cepat, tapi soal terus mencoba. Satu pertanyaan adalah satu langkah maju.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== HALAMAN: RANGKUMAN MATERI ===================== -->
+    <section class="pg" id="sum">
+      <div class="top">
+        <div>
+          <div class="eb">PAHAMI KONSEPNYA, TAKLUKKAN TANTANGANNYA</div>
+          <h1>Bekal kecil untuk langkah besar.</h1>
+          <p class="sub">Rangkuman singkat, contoh yang jelas, dan latihan untuk menguatkan pemahamanmu.</p>
+        </div>
+        <button class="btn" data-go="game">🎲 Kembali bermain</button>
+      </div>
+
+      <!-- Statistik belajar -->
+      <div class="sts">
+        <div class="card stc">
+          <i>📖</i>
+          <div>
+            <b id="lc">0</b> dari 12 <small style="display:inline">materi dipahami</small>
+            <small>Sedikit demi sedikit, makin mengerti.</small>
+          </div>
+        </div>
+        <div class="card stc">
+          <i>🕒</i>
+          <div>
+            <b>35 menit</b> <small style="display:inline">belajar minggu ini</small>
+            <small>Tambah 5 menit lagi hari ini, yuk!</small>
+          </div>
+        </div>
+        <div class="card stc">
+          <i>🔥</i>
+          <div>
+            <b>3 hari</b> <small style="display:inline">belajar berturut-turut</small>
+            <small>Kebiasaan baikmu mulai terbentuk.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="g4">
+        <!-- Daftar topik -->
+        <div>
+          <div class="card" style="padding:20px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <h3>Topik matematika</h3>
+              <span class="bd">Kelas 10–12</span>
+            </div>
+
+            <div class="in" style="margin-top:16px;margin-bottom:12px">🔍<input id="ss" placeholder="Cari rangkuman..." /></div>
+
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--mu)">
+              <span>Progres belajarmu</span>
+              <b style="color:var(--p)" id="pct">0%</b>
+            </div>
+            <div class="pb"><i id="pbi" style="width:0%"></i></div>
+
+            <div id="side"></div>
+          </div>
+
+          <div class="promo">
+            ✨<br />
+            <b>Masih ada yang bikin bingung?</b><br />
+            <a data-go="ai">Tanya Asisten Pintar →</a>
+          </div>
+        </div>
+
+        <!-- Isi materi -->
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--mu)">
+            <span id="bc"></span>
+            <button id="bk" style="font-size:18px">🔖</button>
+          </div>
+
+          <h1 style="font-size:28px;margin:18px 0 12px" id="mt"></h1>
+          <div>
+            <span class="bd" id="bt1"></span>
+            <span class="bd g" id="bt2"></span>
+            <small class="sub">🕒 5 menit baca</small>
+          </div>
+
+          <div class="tabs" id="tabs">
+            <button class="on" data-t="r">Ringkasan</button>
+            <button data-t="c">Contoh soal</button>
+            <button data-t="l">Latihan mini</button>
+          </div>
+
+          <div class="cg">
+            <div id="body"></div>
+
+            <aside>
+              <div class="card" style="padding:18px;box-shadow:none;background:var(--ps);border:0;border-radius:16px">
+                <div class="sl" style="margin-top:0">DI MATERI INI</div>
+                <div style="font-size:12px;color:var(--mu);line-height:2.1">
+                  <b style="color:var(--p)">01</b> Konsep utama<br />
+                  <b style="color:var(--p)">02</b> Rumus penting<br />
+                  <b style="color:var(--p)">03</b> Contoh penyelesaian
+                </div>
+              </div>
+
+              <div class="wr">💡<b>Jangan terjebak!</b><span id="wt"></span></div>
+
+              <div class="qz">
+                <span class="tag">Uji pemahamanmu</span>
+                <p style="margin-top:12px;font-size:13px">Sudah paham? Coba jawab soal berikut.</p>
+                <div class="e" id="qe"></div>
+                <div class="qo" id="mq"></div>
+                <div id="mf"></div>
+                <button class="chk" id="mc">Periksa jawaban</button>
+              </div>
+
+              <p style="margin-top:20px;font-weight:700;font-size:13px">Butuh penjelasan lain?</p>
+              <a class="lk" style="text-align:left;margin-top:6px" data-go="ai">Bahas materi ini dengan AI →</a>
+            </aside>
+          </div>
+
+          <div class="bt">
+            <button class="btn pr" id="dn">✔ Tandai sudah dipahami</button>
+            <div style="text-align:right">
+              <small class="sub">MATERI BERIKUTNYA</small><br />
+              <a class="lk" style="margin:0" id="nx"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <span>Tangga Pintar · Selangkah bermain, selangkah memahami.</span>
+    <span>
+      <button>Panduan belajar</button>
+      <button>Butuh bantuan?</button>
+    </span>
+  </footer>
+
+  <!-- ===================== MODAL ===================== -->
+  <!-- Cara bermain -->
+  <div class="mo" id="mo">
+    <div class="card">
+      <h3 style="margin-bottom:8px">Cara bermain</h3>
+      <ol>
+        <li>Lempar dadu untuk tahu berapa langkah ke depan.</li>
+        <li>Jawab tantangan materi SMA di petak tujuanmu. Asisten AI dan rangkuman terkunci selama tantangan!</li>
+        <li>Jawaban benar: bidak berjalan dan kamu dapat +10 poin.</li>
+        <li>Jawaban salah: bidak tetap di tempat, giliran berpindah.</li>
+        <li>Mendarat di tangga naik, di ekor ular turun.</li>
+        <li>Pemain pertama yang sampai petak 100 menang!</li>
+      </ol>
+      <button class="btn pr" style="margin-top:12px" id="mx">Mengerti</button>
+    </div>
+  </div>
+
+  <!-- Pengaturan pemain -->
+  <div class="mo" id="su">
+    <div class="card">
+      <div class="eb">SIAP BERMAIN?</div>
+      <h3 style="font-size:22px;margin:6px 0 4px">Isi nama pemain dulu</h3>
+      <p class="sub">Pilih jumlah pemain, lalu tulis nama masing-masing.</p>
+      <div class="seg" id="nn"></div>
+      <div id="ni"></div>
+      <div style="display:flex;gap:10px;margin-top:16px">
+        <button class="btn" id="sc" style="display:none">Batal</button>
+        <button class="btn pr" id="ss2" style="flex:1">▶ Mulai bermain</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal umum -->
+  <div class="mo" id="gm">
+    <div class="card">
+      <h3 id="gt" style="margin-bottom:8px"></h3>
+      <div id="gb"></div>
+      <button class="btn pr" style="margin-top:12px" id="gx">Mengerti</button>
+    </div>
+  </div>
+
+  <input type="file" id="fi" accept="image/*" hidden />
+  <div class="tg" id="tg"></div>
+
+  <script>
+    /* =========================================================
+       UTILITAS
+       ========================================================= */
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => [...document.querySelectorAll(s)];
+
+    /* Pecahan ditulis {pembilang|penyebut} dan digambar bersusun, tanpa garis miring */
+    const F = (s) =>
+      String(s).replace(
+        /\{([^{}|]+)\|([^{}|]+)\}/g,
+        '<span class="fr"><b>$1</b><i>$2</i></span>'
+      );
+
+    const toast = (m) => {
+      const t = $("#tg");
+      t.textContent = m;
+      t.classList.add("show");
+      clearTimeout(t._t);
+      t._t = setTimeout(() => t.classList.remove("show"), 2200);
+    };
+
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+    /* =========================================================
+       PERMAINAN: DATA
+       ========================================================= */
+    const LAD = { 3: 39, 14: 35, 26: 57, 36: 44, 50: 91, 62: 81, 71: 92, 73: 93, 82: 96, 87: 98 };
+    const SNK = { 7: 1, 24: 5, 31: 12, 42: 21, 52: 29, 65: 46, 78: 49, 88: 67, 95: 75, 99: 54 };
+
+    // Format: [topik, tingkat, teks soal, ekspresi, [jawaban benar, salah, salah]]
+    const QS = [
+      ["Fungsi Komposisi", "MUDAH", "Diketahui f(x) = 2x + 1 dan g(x) = x − 3.", "(f ∘ g)(x) = ?", ["2x − 5", "2x − 2", "2x + 4"]],
+      ["Fungsi Invers", "MUDAH", "Tentukan invers dari f(x) = 3x − 6.", "f⁻¹(x) = ?", ["{x + 6|3}", "{x − 6|3}", "3x + 6"]],
+      ["Lingkaran", "MUDAH", "Lingkaran berpusat di (0, 0) dengan jari-jari 5.", "Persamaan = ?", ["x² + y² = 25", "x² + y² = 5", "x² − y² = 25"]],
+      ["Lingkaran", "SEDANG", "Lingkaran berpusat di (2, −1) dengan jari-jari 3.", "Persamaan = ?", ["(x − 2)² + (y + 1)² = 9", "(x + 2)² + (y − 1)² = 9", "(x − 2)² + (y + 1)² = 3"]],
+      ["Suku Banyak", "MUDAH", "Tentukan sisa pembagian x³ − 2x + 5 oleh (x − 2).", "Sisa = ?", ["9", "5", "13"]],
+      ["Suku Banyak", "SEDANG", "(x − 1) adalah faktor dari x² + px − 6.", "p = ?", ["5", "−5", "6"]],
+      ["Turunan", "MUDAH", "Tentukan turunan pertama dari f(x) = 3x⁴ − 2x.", "f′(x) = ?", ["12x³ − 2", "3x³ − 2", "12x⁴ − 2"]],
+      ["Turunan", "SEDANG", "Tentukan turunan dari f(x) = (2x + 1)³.", "f′(x) = ?", ["6(2x + 1)²", "3(2x + 1)²", "(2x + 1)²"]],
+      ["Integral", "MUDAH", "Hitung integral berikut.", "∫ (6x² + 4x) dx = ?", ["2x³ + 2x² + C", "6x³ + 4x² + C", "12x + 4 + C"]],
+      ["Integral", "SEDANG", "Hitung integral tentu berikut.", "∫₀² 3x² dx = ?", ["8", "6", "12"]],
+      ["Statistika", "MUDAH", "Data: 4, 6, 8, 10, 12.", "Mean = ?", ["8", "10", "7"]],
+      ["Statistika", "SEDANG", "Data: 3, 5, 7, 9, 11, 13.", "Median = ?", ["8", "7", "9"]]
+    ].map(([tp, lv, t, e, o]) => ({ tp, lv, t, e, o, a: 0 }));
+
+    // Acak urutan opsi, lalu hitung ulang indeks jawaban benar
+    const shq = (q) => {
+      const ix = [0, 1, 2].sort(() => Math.random() - .5);
+      return { ...q, o: ix.map((i) => q.o[i]), a: ix.indexOf(q.a) };
+    };
+
+    // Pemain: [nama, inisial, warna]
+    const P = [
+      ["Naya", "N", "#4F46E5"],
+      ["Raka", "R", "#EC407A"],
+      ["Dina", "D", "#16A34A"],
+      ["Bayu", "B", "#F59E0B"]
+    ];
+    const OFF = [[-8, -7], [8, -7], [-8, 8], [8, 8]]; // offset bidak agar tidak menumpuk
+
+    // State permainan
+    const S = {
+      np: 2,                  // jumlah pemain
+      pos: [1, 1, 1, 1],      // posisi tiap pemain
+      sc: [0, 0, 0, 0],       // skor
+      ok: [0, 0, 0, 0],       // jawaban benar
+      cur: 0,                 // pemain yang sedang giliran
+      rd: 1,                  // putaran
+      pts: 240,               // poin pemain utama
+      busy: false,
+      ob: null,               // tantangan aktif (tangga/ular)
+      sel: null,              // opsi terpilih
+      fb: null,               // umpan balik jawaban
+      done: false,
+      last: 0                 // hasil dadu terakhir
+    };
+
+    /* =========================================================
+       PERMAINAN: PAPAN
+       ========================================================= */
+    // Koordinat (kolom, baris) dari nomor petak, bergaya ular-tangga (zig-zag)
+    const xy = (n) => {
+      const r = Math.floor((n - 1) / 10);
+      let c = (n - 1) % 10;
+      if (r % 2) c = 9 - c;
+      return [c, 9 - r];
+    };
+
+    // Titik tengah petak dalam sistem koordinat SVG 100x100
+    const ctr = (n) => {
+      const [c, r] = xy(n);
+      return [c * 10 + 5, r * 10 + 5];
+    };
+
+    (function buildBoard() {
+      // Petak
+      let h = "";
+      for (let r = 0; r < 10; r++) {
+        for (let c = 0; c < 10; c++) {
+          const row = 9 - r;
+          const n = row * 10 + (row % 2 ? 10 - c : c + 1);
+          const k = n == 1 ? "st" : n == 100 ? "fin" : (r + c) % 2 ? "alt" : "";
+          h += `<div class="cl ${k}">${n == 100 ? "100<small>🏆</small>" : n == 1 ? "1<small>MULAI</small>" : n}</div>`;
+        }
+      }
+      $("#board").innerHTML = h;
+
+      // Tangga & ular (SVG)
+      let s = "";
+
+      for (const a in LAD) {
+        const [x1, y1] = ctr(+a);
+        const [x2, y2] = ctr(LAD[a]);
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const L = Math.hypot(dx, dy);
+        const px = (-dy / L) * 1.6;
+        const py = (dx / L) * 1.6;
+
+        s += `<g stroke="#C9972B" stroke-width=".9" stroke-linecap="round">`;
+        s += `<line x1="${x1 + px}" y1="${y1 + py}" x2="${x2 + px}" y2="${y2 + py}"/>`;
+        s += `<line x1="${x1 - px}" y1="${y1 - py}" x2="${x2 - px}" y2="${y2 - py}"/>`;
+
+        const nr = Math.max(2, Math.round(L / 4.2)); // jumlah anak tangga
+        for (let k = 1; k <= nr; k++) {
+          const t = k / (nr + 1);
+          s += `<line x1="${x1 + dx * t + px}" y1="${y1 + dy * t + py}" x2="${x1 + dx * t - px}" y2="${y1 + dy * t - py}"/>`;
+        }
+        s += "</g>";
+      }
+
+      let i = 0;
+      const SC = ["#F0407F", "#5B7CF5", "#10B981", "#F59E0B", "#A855F7"];
+
+      for (const a in SNK) {
+        const [x1, y1] = ctr(+a);
+        const [x2, y2] = ctr(SNK[a]);
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const L = Math.hypot(dx, dy);
+        const nx = -dy / L;
+        const ny = dx / L;
+
+        let d = "";
+        for (let t = 0; t <= 1.001; t += .05) {
+          const w = Math.sin(t * Math.PI * 4) * 2.2;
+          d += (t ? "L" : "M") + (x1 + dx * t + nx * w).toFixed(1) + " " + (y1 + dy * t + ny * w).toFixed(1);
+        }
+
+        const col = SC[i++ % 5];
+        s += `<path d="${d}" fill="none" stroke="${col}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>`;
+        s += `<circle cx="${x1}" cy="${y1}" r="1.5" fill="${col}"/>`;
+        s += `<circle cx="${x1 + .4}" cy="${y1 - .5}" r=".4" fill="#fff"/>`;
+      }
+      $("#ov").innerHTML = s;
+
+      // Bidak
+      $("#pcs").innerHTML = P
+        .map((p, i) => `<div class="pc" id="p${i}" style="background:${p[2]}">${p[1]}</div>`)
+        .join("");
+
+      // Dadu 3D
+      const PIPS = { 1: [5], 2: [1, 9], 3: [1, 5, 9], 4: [1, 3, 7, 9], 5: [1, 3, 5, 7, 9], 6: [1, 3, 4, 6, 7, 9] };
+      $("#cube").innerHTML = [1, 2, 3, 4, 5, 6]
+        .map((n) => `<div class="fc f${n} ${n == 1 ? "a" : ""}">${PIPS[n]
+          .map((q) => `<i style="grid-area:${Math.ceil(q / 3)}/${((q - 1) % 3) + 1}"></i>`)
+          .join("")}</div>`)
+        .join("");
+      $("#cube").style.transform = "rotateX(720deg) rotateY(720deg)";
+    })();
+
+    /* =========================================================
+       PERMAINAN: DADU
+       ========================================================= */
+    let cx = 720;
+    let cy = 720;
+
+    // Rotasi [x, y] agar sisi tertentu menghadap ke depan
+    const TR = { 1: [0, 0], 2: [0, 90], 3: [-90, 0], 4: [90, 0], 5: [0, -90], 6: [0, 180] };
+
+    function spin(v) {
+      const t = TR[v];
+      const m = (a) => ((a % 360) + 360) % 360;
+      cx += 720 + ((m(t[0]) - m(cx) + 360) % 360);
+      cy += 720 + ((m(t[1]) - m(cy) + 360) % 360);
+      $("#cube").style.transform = `rotateX(${cx}deg) rotateY(${cy}deg)`;
+    }
+
+    /* =========================================================
+       PERMAINAN: RENDER
+       ========================================================= */
+    function place(i) {
+      const e = $("#p" + i);
+      e.style.display = i < S.np ? "" : "none";
+      const [c, r] = xy(S.pos[i]);
+      e.style.left = `calc(${c * 10 + 5}% + ${OFF[i][0]}px)`;
+      e.style.top = `calc(${r * 10 + 5}% + ${OFF[i][1]}px)`;
+    }
+
+    const log = (m) => ($("#log").innerHTML = m);
+
+    function render() {
+      P.forEach((_, i) => place(i));
+
+      $("#pts").textContent = S.pts;
+      $("#rn").textContent = S.rd;
+      $("#rd").textContent = S.np + " pemain · Putaran " + S.rd;
+
+      $$("nav button").forEach((b) =>
+        b.classList.toggle("locked", !!S.ob && b.dataset.p != "game")
+      );
+
+      const c = P[S.cur];
+      const lock = S.busy || S.ob;
+
+      $("#chg").disabled = !!lock;
+      $("#tt").textContent = S.done ? "Permainan selesai!" : "Giliran " + c[0] + "!";
+      $("#ds").textContent = S.last ? S.last + " langkah ke depan" : "Lempar dadunya!";
+      $("#dh").textContent = S.ob
+        ? "Jawab tantangan di petak " + S.ob.from + " dulu, ya."
+        : S.done
+          ? "Atur ulang lewat menu profil."
+          : c[0] + ", lempar dadu untuk melangkah.";
+
+      const rb = $("#roll");
+      rb.disabled = !!lock || S.done;
+      rb.classList.toggle("act", !rb.disabled);
+      rb.textContent = S.busy && !S.ob ? "Sedang berjalan..." : "🎲 Lempar dadu";
+
+      // Kartu tantangan
+      const o = S.ob;
+      $("#qc").innerHTML = o
+        ? `<div style="display:flex;justify-content:space-between;align-items:center">
+             <h3>${o.t == "ladder" ? "🪜 Tantangan tangga" : "🐍 Ancaman ular"} · petak ${o.from}</h3>
+             <span class="tag">+10 poin</span>
+           </div>
+           <p class="qh">${o.t == "ladder"
+              ? `Jawab BENAR untuk naik ke petak ${o.to}. Jika salah, tetap di petak ${o.from}.`
+              : `Jawab BENAR untuk bertahan di petak ${o.from}. Jika salah, turun ke petak ${o.to}.`}</p>
+           <div class="eb" style="color:var(--mu);margin:14px 0 8px">${o.q.tp.toUpperCase()} · TINGKAT ${o.q.lv}</div>
+           <p style="line-height:1.6">${F(o.q.t)}</p>
+           <div class="eq">${F(o.q.e)}</div>
+           ${o.q.o.map((x, i) => `<button class="op ${S.fb ? (i == o.q.a ? "good" : i == S.sel ? "bad" : "") : S.sel == i ? "s" : ""}" data-i="${i}"><span class="k">${"ABC"[i]}</span>${F(x)}<i></i></button>`).join("")}
+           ${S.fb ? `<div class="fb ${S.fb.g ? "good" : "bad"}">${S.fb.m}</div>` : ""}
+           <button class="btn pr" id="ck" style="width:100%;margin-top:6px" ${S.fb ? "disabled" : ""}>→ Periksa jawaban</button>
+           <div class="qh" style="text-align:center;margin-top:14px">🔒 Asisten AI dan rangkuman dikunci selama tantangan. Kamu pasti bisa!</div>`
+        : S.done
+          ? `<h3>🏆 ${c[0]} menang!</h3>
+             <p class="sub" style="margin:12px 0">Sampai di petak 100. Mau main lagi?</p>
+             <button class="btn pr" id="again" style="width:100%">Main lagi</button>`
+          : `<h3>Tantangan petak</h3>
+             <p class="sub" style="margin-top:12px;line-height:1.6">Soal muncul saat bidak mendarat di tangga atau ular. Lempar dadu untuk melangkah!</p>`;
+
+      // Papan skor (urut dari skor tertinggi)
+      $("#pls").innerHTML = P
+        .slice(0, S.np)
+        .map((p, i) => i)
+        .sort((a, b) => S.sc[b] - S.sc[a])
+        .map((i) => `<div class="pl ${i == S.cur && !S.done ? "me" : ""}">
+            <div class="pc" style="background:${P[i][2]}">${P[i][1]}</div>
+            <div><b>${P[i][0]}${i == S.cur && !S.done ? " · Giliran" : ""}</b><br><small class="sub">Petak ${S.pos[i]} · ${S.ok[i]} jawaban benar</small></div>
+            <b class="n" style="color:${P[i][2]}">${S.sc[i]}</b>
+          </div>`)
+        .join("");
+    }
+
+    /* =========================================================
+       PERMAINAN: ALUR GILIRAN
+       ========================================================= */
+    function next() {
+      S.cur = (S.cur + 1) % S.np;
+      if (!S.cur) S.rd++;
+      S.busy = false;
+      S.ob = null;
+      S.fb = null;
+      S.sel = null;
+      render();
+    }
+
+    async function roll() {
+      if (S.busy || S.ob || S.done) return;
+      S.busy = true;
+      render();
+
+      const d = 1 + Math.floor(Math.random() * 6);
+      const i = S.cur;
+
+      spin(d);
+      await sleep(1050);
+      S.last = d;
+      log(`🎲 ${P[i][0]} melempar dadu dan mendapat angka <b>${d}</b>.`);
+      render();
+
+      // Jalan per petak; jika melewati 100, bidak memantul mundur
+      let dir = 1;
+      for (let k = 0; k < d; k++) {
+        if (dir == 1 && S.pos[i] >= 100) dir = -1;
+        S.pos[i] += dir;
+        place(i);
+        await sleep(260);
+      }
+
+      const f = S.pos[i];
+
+      if (f == 100) {
+        S.done = true;
+        S.busy = false;
+        S.sc[i] += 10;
+        log(` SELAMAT! ${P[i][0]} sampai di petak 100 dan menang! 🎉`);
+        toast(P[i][0] + " menang! 🎉");
+        return render();
+      }
+
+      const t = LAD[f] ? "ladder" : SNK[f] ? "snake" : null;
+
+      if (t) {
+        S.ob = {
+          t,
+          from: f,
+          to: LAD[f] || SNK[f],
+          q: shq(QS[Math.floor(Math.random() * QS.length)])
+        };
+        S.sel = null;
+        S.fb = null;
+        S.busy = false;
+        log(t == "ladder"
+          ? ` ${P[i][0]} berhenti di dasar tangga petak ${f}. Jawab soal untuk naik!`
+          : ` Awas! ${P[i][0]} berhenti di kepala ular petak ${f}. Jawab soal untuk bertahan!`);
+        render();
+      } else {
+        log(`👣 ${P[i][0]} melangkah ke petak ${f}.`);
+        next();
+      }
+    }
+
+    async function check() {
+      const o = S.ob;
+      if (!o || S.fb) return;
+      if (S.sel == null) return toast("Pilih salah satu jawaban dulu, ya.");
+
+      const g = S.sel == o.q.a;
+      const i = S.cur;
+      const n = P[i][0];
+
+      S.busy = true;
+      S.fb = g
+        ? { g: 1, m: "✅ Benar! +10 poin." }
+        : { g: 0, m: "❌ Belum tepat. Jawaban benar: " + F(o.q.o[o.q.a]) + "." };
+
+      if (g) {
+        S.sc[i] += 10;
+        S.ok[i]++;
+        if (i == 0) S.pts += 10;
+      }
+
+      if (o.t == "ladder" && g) {
+        S.pos[i] = o.to;
+        log(` Langkah keren! ${n} menjawab benar dan naik tangga dari petak ${o.from} ke petak ${o.to}.`);
+      } else if (o.t == "snake" && !g) {
+        S.pos[i] = o.to;
+        log(` ${n} menjawab salah dan merosot dari petak ${o.from} ke petak ${o.to}. Tetap semangat!`);
+      } else {
+        log(o.t == "snake"
+          ? ` ${n} menjawab benar dan lolos dari gigitan ular!`
+          : ` ${n} menjawab salah dan gagal naik tangga.`);
+      }
+
+      render();
+      await sleep(1600);
+      next();
+    }
+
+    function reset(msg) {
+      Object.assign(S, {
+        pos: [1, 1, 1, 1],
+        sc: [0, 0, 0, 0],
+        ok: [0, 0, 0, 0],
+        cur: 0,
+        rd: 1,
+        busy: false,
+        ob: null,
+        sel: null,
+        fb: null,
+        done: false,
+        last: 0
+      });
+      log(msg || "👋 Selamat datang! Lempar dadu untuk memulai permainan.");
+      render();
+    }
+
+    /* Event permainan */
+    $("#roll").onclick = roll;
+
+    $("#qc").onclick = (e) => {
+      const o = e.target.closest(".op");
+      if (o && !S.fb) {
+        S.sel = +o.dataset.i;
+        render();
+      }
+      if (e.target.closest("#ck")) check();
+      if (e.target.closest("#again")) reset();
+    };
+
+    $("#how").onclick = () => $("#mo").classList.add("show");
+    $("#mx").onclick = () => $("#mo").classList.remove("show");
+
+    $("#reset").onclick = () => {
+      if (S.busy || S.ob) return toast("Tunggu giliran selesai dulu, ya.");
+      reset();
+      $("#dd").classList.remove("show");
+    };
+
+    /* =========================================================
+       PENGATURAN PEMAIN
+       ========================================================= */
+    const SU = { n: 2, names: ["", "", "", ""], started: false };
+
+    const initials = (n) => {
+      const w = n.trim().split(/\s+/);
+      return (w.length > 1 ? w[0][0] + w[1][0] : n.trim().slice(0, 2)).toUpperCase();
+    };
+
+    function drawSetup() {
+      $("#nn").innerHTML = [2, 3, 4]
+        .map((n) => `<button class="${n == SU.n ? "on" : ""}" data-n="${n}">${n} pemain</button>`)
+        .join("");
+
+      $("#ni").innerHTML = Array.from({ length: SU.n }, (_, i) =>
+        `<label>
+           <span style="background:${P[i][2]}">${i + 1}</span>
+           <input maxlength="12" data-i="${i}" placeholder="Nama pemain ${i + 1}" value="${SU.names[i].replace(/"/g, "&quot;")}" autocomplete="off">
+         </label>`
+      ).join("");
+    }
+
+    function openSetup() {
+      $("#sc").style.display = SU.started ? "" : "none";
+      drawSetup();
+      $("#su").classList.add("show");
+      setTimeout(() => {
+        const i = $("#ni input");
+        if (i) i.focus();
+      }, 60);
+    }
+
+    function startGame() {
+      const ns = SU.names.slice(0, SU.n).map((s) => s.trim());
+      const bad = ns.findIndex((s) => !s);
+
+      if (bad >= 0) {
+        toast("Isi nama pemain " + (bad + 1) + " dulu, ya.");
+        return $$("#ni input")[bad].focus();
+      }
+      if (new Set(ns.map((s) => s.toLowerCase())).size < ns.length) {
+        return toast("Nama pemain tidak boleh sama.");
+      }
+
+      const first = !SU.started;
+      ns.forEach((n, i) => {
+        P[i][0] = n;
+        P[i][1] = n[0].toUpperCase();
+      });
+
+      S.np = ns.length;
+      SU.started = true;
+      $("#av").textContent = initials(ns[0]);
+      $("#su").classList.remove("show");
+      reset("👋 Halo " + ns.join(", ") + "! Lempar dadu untuk memulai permainan.");
+      if (first) seed();
+    }
+
+    $("#nn").onclick = (e) => {
+      const b = e.target.closest("button");
+      if (b) {
+        SU.n = +b.dataset.n;
+        drawSetup();
+      }
+    };
+    $("#ni").oninput = (e) => {
+      SU.names[+e.target.dataset.i] = e.target.value;
+    };
+    $("#ni").onkeydown = (e) => {
+      if (e.key == "Enter") startGame();
+    };
+    $("#ss2").onclick = startGame;
+    $("#sc").onclick = () => $("#su").classList.remove("show");
+    $("#chg").onclick = () => {
+      if (S.busy || S.ob) return toast("Selesaikan giliran dulu, ya.");
+      openSetup();
+    };
+    $("#chp").onclick = () => {
+      $("#dd").classList.remove("show");
+      $("#chg").click();
+    };
+
+    /* =========================================================
+       NAVIGASI (AI dan rangkuman terkunci saat ada tantangan)
+       ========================================================= */
+    function go(p) {
+      if (S.ob && p != "game") {
+        return toast("🔒 Selesaikan tantangan dulu, asisten AI dan rangkuman terkunci.");
+      }
+      $$(".pg").forEach((e) => e.classList.toggle("on", e.id == p));
+      $$("nav button").forEach((b) => b.classList.toggle("on", b.dataset.p == p));
+      scrollTo(0, 0);
+    }
+
+    $$("nav button").forEach((b) => (b.onclick = () => go(b.dataset.p)));
+
+    document.addEventListener("click", (e) => {
+      const g = e.target.closest("[data-go]");
+      if (g) go(g.dataset.go);
+      if (!e.target.closest(".rt")) $("#dd").classList.remove("show");
+    });
+
+    $("#ddb").onclick = () => $("#dd").classList.toggle("show");
+
+    /* =========================================================
+       AI: DAFTAR TOPIK
+       ========================================================= */
+    const TOP = ["Fungsi Komposisi", "Fungsi Invers", "Lingkaran", "Suku Banyak", "Turunan", "Integral", "Statistika"];
+    const ICO = ["∘", "⁻¹", "◯", "xⁿ", "f′", "∫", "▥"];
+    let curT = 0;
+
+    function drawTopics() {
+      const f = $("#ts").value.toLowerCase();
+      $("#tps").innerHTML =
+        TOP.map((t, i) =>
+          t.toLowerCase().includes(f)
+            ? `<button class="tp ${i == curT ? "on" : ""}" data-i="${i}">${ICO[i]} &nbsp;${t}</button>`
+            : ""
+        ).join("") || '<small class="sub">Topik tidak ditemukan.</small>';
+    }
+
+    $("#ts").oninput = drawTopics;
+    $("#tps").onclick = (e) => {
+      const b = e.target.closest(".tp");
+      if (b) {
+        curT = +b.dataset.i;
+        drawTopics();
+        askAI("Jelaskan dasar-dasar " + TOP[curT].toLowerCase() + " dong");
+      }
+    };
+
+    /*ENG*/
+    /* =========================================================
+       AI: MESIN JAWABAN (parser polinom + pemecah soal)
+       ========================================================= */
+    const AI = { pending: null };
+
+    // Pemetaan superskrip <-> angka biasa
+    const SUP = { "⁻": "-", "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9" };
+    const SR = "⁰¹²³⁴⁵⁶⁷⁸⁹";
+    const sup = (n) => [...String(n)].map((c) => SR[c]).join("");
+
+    // Normalisasi teks matematika agar mudah di-parse
+    const nz = (s) =>
+      s
+        .toLowerCase()
+        .replace(/[⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+/g, (m) => "^" + [...m].map((c) => SUP[c]).join(""))
+        .replace(/[−–—]/g, "-")
+        .replace(/[×·*]/g, "")
+        .replace(/\s+/g, "");
+
+    // Format angka gaya Indonesia (koma desimal, minus tipografis)
+    const num = (x) => String(+x.toFixed(2)).replace(".", ",").replace("-", "−");
+
+    // Format pecahan sederhana ({pembilang|penyebut})
+    const frs = (x) => {
+      const s = x < 0 ? "−" : "";
+      const a = Math.abs(x);
+      if (Math.abs(a - Math.round(a)) < 1e-6) return s + Math.round(a);
+      for (let d = 2; d <= 12; d++) {
+        if (Math.abs(a * d - Math.round(a * d)) < 1e-6) return s + `{${Math.round(a * d)}|${d}}`;
+      }
+      return num(x);
+    };
+
+    /* ---- Polinom: koefisien disimpan sebagai array, indeks = pangkat ---- */
+
+    // Parse string polinom menjadi array koefisien (null jika tidak valid)
+    function pp(s) {
+      s = nz(s);
+      if (!s || /[^\dx^+\-]/.test(s)) return null;
+
+      const c = [];
+      for (const t of s.replace(/-/g, "+-").split("+").filter(Boolean)) {
+        const m = t.match(/^(-?)(\d*)(x)?(?:\^(\d+))?$/);
+        if (!m || (!m[2] && !m[3]) || (m[4] && !m[3])) return null;
+
+        const d = m[3] ? (m[4] ? +m[4] : 1) : 0;
+        c[d] = (c[d] || 0) + (m[1] ? -1 : 1) * (m[2] === "" ? 1 : +m[2]);
+      }
+
+      if (!c.length) return null;
+      for (let i = 0; i < c.length; i++) c[i] = c[i] || 0;
+      return c;
+    }
+
+    const pm = (a, b) => {                       // perkalian polinom
+      const r = Array(a.length + b.length - 1).fill(0);
+      a.forEach((x, i) => b.forEach((y, j) => (r[i + j] += x * y)));
+      return r;
+    };
+    const pa = (a, b) =>                         // penjumlahan polinom
+      Array.from({ length: Math.max(a.length, b.length) }, (_, i) => (a[i] || 0) + (b[i] || 0));
+    const cmp = (f, g) => {                      // komposisi f(g(x))
+      let r = [0];
+      let p = [1];
+      f.forEach((c) => {
+        r = pa(r, p.map((v) => v * c));
+        p = pm(p, g);
+      });
+      return r;
+    };
+    const dv = (c) => c.slice(1).map((v, i) => v * (i + 1));           // turunan
+    const ig = (c) => [0, ...c.map((v, i) => v / (i + 1))];            // antiturunan
+    const ev = (c, x) => c.reduceRight((s, v) => s * x + v, 0);        // evaluasi di x
+    const mono = (i, v) => {                                           // suku tunggal v·xⁱ
+      const a = Array(i + 1).fill(0);
+      a[i] = v;
+      return a;
+    };
+
+    // Polinom -> teks cantik (dengan superskrip)
+    const ps = (c) => {
+      const o = [];
+      for (let i = c.length - 1; i >= 0; i--) {
+        const v = c[i];
+        if (!v) continue;
+        const a = Math.abs(v);
+        let t = a == 1 && i > 0 ? "" : frs(a);
+        if (i > 0) t += "x" + (i > 1 ? sup(i) : "");
+        o.push([v < 0, t]);
+      }
+      if (!o.length) return "0";
+      return o
+        .map((p, i) => (i ? (p[0] ? " − " : " + ") : p[0] ? "−" : "") + p[1])
+        .join("");
+    };
+
+    // Polinom -> teks polos (untuk dibandingkan dengan jawaban pengguna)
+    const pl = (c) => {
+      let o = "";
+      for (let i = c.length - 1; i >= 0; i--) {
+        const v = c[i];
+        if (!v) continue;
+        const a = Math.abs(v);
+        o += (v < 0 ? "-" : o ? "+" : "") + (a == 1 && i ? "" : a) + (i ? "x" + (i > 1 ? "^" + i : "") : "");
+      }
+      return o || "0";
+    };
+
+    // Ambil ekspresi polinom terpanjang dari sebuah kalimat
+    const gp = (s) => {
+      const r = (s.match(/[+-]?[\dx^]+(?:[+-][\dx^]+)*/g) || [])
+        .filter((x) => /x/.test(x) && /\d/.test(x))
+        .sort((a, b) => b.length - a.length)[0];
+      return r ? pp(r) : null;
+    };
+
+    // Kotak langkah-langkah penyelesaian
+    const steps = (a) =>
+      `<div class="stp">${a
+        .map((s, i) => `<div><em>${i + 1}</em><div><b>${s[0]}</b><span>${F(s[1])}</span></div></div>`)
+        .join("")}</div>`;
+
+    /* ---- Pemecah soal ---- */
+    function solve(q) {
+      const s = nz(q);
+      const l = q.toLowerCase().replace(/[−–]/g, "-");
+      let m, c;
+
+      // Fungsi invers
+      if (/invers|\^-1/.test(s)) {
+        c = gp(s);
+        if (!c || c.length != 2 || !c[1]) return null;
+
+        const a = c[1];
+        const b = c[0];
+        const lin = (v) => (b ? `${v} ${b > 0 ? "−" : "+"} ${num(Math.abs(b))}` : v);
+        const inv = (v) => (a == 1 ? lin(v) : `{${lin(v)}|${num(a)}}`);
+
+        return `Mencari invers dari f(x) = ${ps(c)}:${steps([
+          ["Tulis y = f(x)", "y = " + ps(c)],
+          ["Buat x sendiri", "x = " + inv("y")],
+          ["Tukar x dan y", "f⁻¹(x) = " + inv("x")]
+        ])}Jadi <b>f⁻¹(x) = ${F(inv("x"))}</b>. ✨`;
+      }
+
+      // Fungsi komposisi
+      if (/komposisi|∘|f\(g|g\(f|gof|fog/.test(s)) {
+        const fm = s.match(/f\(x\)=([\dx^+\-]+)/);
+        const gm = s.match(/g\(x\)=([\dx^+\-]+)/);
+        const f = fm && pp(fm[1]);
+        const g = gm && pp(gm[1]);
+        if (!f || !g) return null;
+
+        const r = /gof|g∘f|g\(f/.test(s);
+        const [A, B, a, b] = r ? [g, f, "g", "f"] : [f, g, "f", "g"];
+        const RS = cmp(A, B);
+
+        return `Menghitung (${a} ∘ ${b})(x) = ${a}(${b}(x)):${steps([
+          ["Tulis kedua fungsi", `${a}(x) = ${ps(A)} dan ${b}(x) = ${ps(B)}`],
+          ["Substitusi", `Ganti setiap x pada ${a}(x) dengan (${ps(B)}).`],
+          ["Sederhanakan", `(${a} ∘ ${b})(x) = ${ps(RS)}`]
+        ])}Jadi <b>(${a} ∘ ${b})(x) = ${F(ps(RS))}</b>. ✨`;
+      }
+
+      // Lingkaran
+      if (/lingkaran|pusat|jari|x\^2\+y\^2/.test(s)) {
+        const sg = (v) => (v >= 0 ? `+ ${num(v)}` : `− ${num(-v)}`);
+        const co = (t) => (t.length == 1 ? +(t + "1") : +t);
+
+        // Dari pusat & jari-jari -> persamaan
+        if ((m = s.match(/pusat\(?(-?\d+),(-?\d+)\)?.*?(?:jari-?jari|r)=?(\d+)/))) {
+          const a = +m[1];
+          const b = +m[2];
+          const r = +m[3];
+          const h = (v, w) => (v ? `(${w} ${v > 0 ? "−" : "+"} ${Math.abs(v)})²` : `${w}²`);
+          const A = -2 * a;
+          const B = -2 * b;
+          const C = a * a + b * b - r * r;
+
+          return `Persamaan lingkaran pusat (${num(a)}, ${num(b)}) dan jari-jari ${r}:${steps([
+            ["Pakai rumus", "(x − a)² + (y − b)² = r²"],
+            ["Masukkan pusat dan jari-jari", `${h(a, "x")} + ${h(b, "y")} = ${r * r}`],
+            ["Bentuk umum (jabarkan)", `x² + y² ${A ? sg(A) + "x " : ""}${B ? sg(B) + "y " : ""}${C ? sg(C) + " " : ""}= 0`]
+          ])}Jadi persamaannya <b>${h(a, "x")} + ${h(b, "y")} = ${r * r}</b>. ⭕`;
+        }
+
+        // Dari bentuk umum -> pusat & jari-jari
+        let A, B, C;
+        if ((m = s.match(/x\^2\+y\^2([+-]\d*)x([+-]\d*)y([+-]\d+)=0/))) {
+          A = co(m[1]);
+          B = co(m[2]);
+          C = +m[3];
+        } else if ((m = s.match(/x\^2\+y\^2=(\d+)/))) {
+          A = 0;
+          B = 0;
+          C = -m[1];
+        } else {
+          return null;
+        }
+
+        const r2 = A * A / 4 + B * B / 4 - C;
+        if (r2 <= 0) return "Persamaan itu tidak membentuk lingkaran, karena r² harus positif. Cek lagi tandanya, ya! 🤔";
+
+        const r = Math.sqrt(r2);
+        const rr = Number.isInteger(r) ? r : "√" + num(r2);
+
+        return `Pusat dan jari-jari dari x² + y² ${A ? sg(A) + "x " : ""}${B ? sg(B) + "y " : ""}${C ? sg(C) + " " : ""}= 0:${steps([
+          ["Cari pusat", `Pusat = (−{A|2}, −{B|2}) dengan A = ${num(A)} dan B = ${num(B)}, jadi pusat (${num(-A / 2)}, ${num(-B / 2)}).`],
+          ["Hitung jari-jari", `r² = {A²|4} + {B²|4} − C = ${num(A * A / 4)} + ${num(B * B / 4)} − (${num(C)}) = ${num(r2)}, sehingga r = ${rr}.`]
+        ])}Jadi pusatnya <b>(${num(-A / 2)}, ${num(-B / 2)})</b> dan jari-jarinya <b>${rr}</b>. ⭕`;
+      }
+
+      // Teorema sisa
+      if (
+        (m = s.match(/([\dx^+\-]*x[\dx^+\-]*)(?:dibagi|:)\(?x([+-]\d+)\)?/)) &&
+        (c = pp(m[1]))
+      ) {
+        const k = -m[2];
+        const v = ev(c, k);
+        const sb = c
+          .map((x, i) => (x ? (i ? `${num(x)}(${num(k)})${i > 1 ? sup(i) : ""}` : num(x)) : null))
+          .filter((x) => x !== null)
+          .reverse()
+          .join(" + ")
+          .replace(/ \+ −/g, " − ");
+        const dv_ = `(x ${k >= 0 ? "−" : "+"} ${Math.abs(k)})`;
+
+        return `Sisa pembagian ${ps(c)} oleh ${dv_}:${steps([
+          ["Teorema sisa", `Sisa = P(${num(k)}), yaitu nilai P(x) saat x = ${num(k)}.`],
+          ["Substitusi", `P(${num(k)}) = ${sb} = ${num(v)}`]
+        ])}Jadi sisanya <b>${num(v)}</b>.${v == 0 ? ` Karena sisanya 0, ${dv_} adalah faktor dari P(x).` : ""} ✨`;
+      }
+
+      // Turunan
+      if (/turun|derivatif|diferensial|d\/dx|gradien/.test(s)) {
+        // Aturan rantai: (ax + b)^n
+        if (
+          (m = s.match(/\(([\dx+\-]+)\)\^(\d+)/)) &&
+          (c = pp(m[1])) &&
+          c.length == 2 &&
+          c[1]
+        ) {
+          const n = +m[2];
+          const u = c[1];
+          const pw = n - 1 > 1 ? sup(n - 1) : "";
+
+          return `Fungsi pangkat dalam kurung, pakai aturan rantai:${steps([
+            ["Tentukan fungsi dalam", `u = ${ps(c)}, sehingga u′ = ${num(u)}`],
+            ["Aturan rantai", `f′(x) = n · uⁿ⁻¹ · u′ = ${n} · (${ps(c)})${pw} · ${num(u)}`]
+          ])}Jadi <b>f′(x) = ${num(n * u)}(${ps(c)})${pw}</b>. ✨`;
+        }
+
+        if (/\)[\^(x\d]/.test(s)) return null;
+
+        c = gp(s);
+        if (!c) return null;
+
+        const d = dv(c);
+        const k = (l.match(/(?:di|untuk|saat)\s*x\s*=\s*(-?\d+)/) || [])[1];
+        const ts = c
+          .map((v, i) => (i && v ? `${ps(mono(i, v))} menjadi ${ps(mono(i - 1, v * i))}` : null))
+          .filter(Boolean)
+          .join("; ");
+
+        const st = [
+          ["Turunkan tiap suku", ts + (c[0] ? ". Konstanta turunannya 0." : "")],
+          ["Gabungkan", `f′(x) = ${ps(d)}`]
+        ];
+        if (k != null) st.push(["Masukkan nilai x", `f′(${k}) = ${num(ev(d, +k))}`]);
+
+        return `Menurunkan f(x) = ${ps(c)}:${steps(st)}Jadi <b>f′(x) = ${F(ps(d))}</b>${k != null ? `, dan f′(${k}) = <b>${num(ev(d, +k))}</b>` : ""}. ✨`;
+      }
+
+      // Integral
+      if (/integral|∫/.test(s)) {
+        c = gp(s.replace(/dx/g, ""));
+        if (!c) return null;
+
+        const Fx = ig(c);
+        const b = s.match(/(-?\d+)(?:sampai|hingga)(-?\d+)/);
+
+        // Integral tentu
+        if (b) {
+          const lo = +b[1];
+          const hi = +b[2];
+          const v = ev(Fx, hi) - ev(Fx, lo);
+
+          return `Integral tentu dari ${num(lo)} sampai ${num(hi)}:${steps([
+            ["Cari antiturunan", `F(x) = ${ps(Fx)}`],
+            ["Substitusi batas", `F(${num(hi)}) − F(${num(lo)}) = ${frs(ev(Fx, hi))} − (${frs(ev(Fx, lo))})`],
+            ["Hitung", `= ${frs(v)}`]
+          ])}Jadi hasilnya <b>${F(frs(v))}</b>. ✨`;
+        }
+
+        // Integral tak tentu
+        const ts = c
+          .map((v, i) => (v ? `${ps(mono(i, v))} menjadi ${ps(mono(i + 1, v / (i + 1)))}` : null))
+          .filter(Boolean)
+          .join("; ");
+
+        return `Mengintegralkan ${ps(c)}:${steps([
+          ["Naikkan pangkat, bagi pangkat baru", ts],
+          ["Tambahkan konstanta", `${ps(Fx)} + C`]
+        ])}Jadi <b>${F(ps(Fx))} + C</b>. ✨`;
+      }
+
+      // Statistika
+      if (/mean|rata|median|modus|varians|simpangan|jangkauan|statistik/.test(l)) {
+        const d = (l.match(/-?\d+(?:\.\d+)?/g) || []).map(Number);
+        if (d.length < 2) return null;
+
+        const n = d.length;
+        const so = [...d].sort((a, b) => a - b);
+        const sm = d.reduce((a, b) => a + b, 0);
+        const mu = sm / n;
+        const md = n % 2 ? so[(n - 1) / 2] : (so[n / 2 - 1] + so[n / 2]) / 2;
+
+        const cnt = {};
+        d.forEach((x) => (cnt[x] = (cnt[x] || 0) + 1));
+        const mx = Math.max(...Object.values(cnt));
+        const mo = mx > 1 ? Object.keys(cnt).filter((k) => cnt[k] == mx).join(", ") : "tidak ada";
+        const va = d.reduce((a, x) => a + (x - mu) ** 2, 0) / n;
+
+        return `Data: ${d.join(", ")} (n = ${n}):${steps([
+          ["Urutkan data", so.join(", ")],
+          ["Mean", `{${num(sm)}|${n}} = ${num(mu)}`],
+          ["Median", n % 2
+            ? `Nilai tengah, yaitu data ke-${(n + 1) / 2}, = ${num(md)}`
+            : `Rata-rata dua nilai tengah ${so[n / 2 - 1]} dan ${so[n / 2]} = ${num(md)}`],
+          ["Modus", mo],
+          ["Jangkauan", `${so[n - 1]} − ${so[0]} = ${num(so[n - 1] - so[0])}`],
+          ["Varians (populasi)", `${num(va)}, simpangan baku = ${num(Math.sqrt(va))}`]
+        ])}✨`;
+      }
+
+      return null;
+    }
+
+    /* ---- Soal latihan dari AI ---- */
+    const qDer = (c) => {
+      AI.pending = {
+        ans: nz(pl(dv(c))),
+        h: ["Pangkat jadi pengali", "Tiap suku axⁿ menjadi a · n · xⁿ⁻¹. Contoh: 3x⁴ menjadi 12x³."],
+        sol: solve("turunan " + pl(c))
+      };
+      return `Coba turunkan <b>f(x) = ${ps(c)}</b> 🧩 Ketik jawabanmu (misalnya 3x^2 + 1), atau tekan "Beri aku petunjuk".`;
+    };
+
+    const qInt = (c) => {
+      AI.pending = {
+        ans: nz(pl(ig(c)) + "+c"),
+        h: ["Naikkan pangkat", "Pangkat naik 1, lalu bagi dengan pangkat baru. Jangan lupa + C."],
+        sol: solve("integral " + pl(c))
+      };
+      return `Coba hitung <b>∫ (${ps(c)}) dx</b> 🧩 Ketik jawabanmu (misalnya x^2 + C), atau tekan "Beri aku petunjuk".`;
+    };
+
+    const qRem = (c, k) => {
+      AI.pending = {
+        ans: String(ev(c, k)),
+        h: ["Teorema sisa", `Sisa = P(k). Untuk (x − ${k}), masukkan x = ${k} ke P(x).`],
+        sol: solve(`sisa ${pl(c)} dibagi (x-${k})`)
+      };
+      return `Coba tentukan sisa <b>${ps(c)}</b> dibagi <b>(x − ${k})</b> 🧩 Ketik angkanya, atau tekan "Beri aku petunjuk".`;
+    };
+
+    function newQ() {
+      const r = (n) => Math.floor(Math.random() * n);
+      const t = r(3);
+
+      if (t == 0) {
+        const n = 2 + r(3);
+        const c = Array(n + 1).fill(0);
+        c[n] = 2 + r(5);
+        c[1] = (r(2) ? 1 : -1) * (1 + r(5));
+        return qDer(c);
+      }
+
+      if (t == 1) {
+        const m = 1 + r(3);
+        const c = Array(m + 1).fill(0);
+        c[m] = (2 + r(4)) * (m + 1);
+        return qInt(c);
+      }
+
+      return qRem([r(9) - 4, r(7) - 3, 1], 1 + r(3));
+    }
+
+    // Periksa jawaban pengguna untuk soal yang sedang menunggu
+    function chk(q) {
+      const p = AI.pending;
+      const v = nz(q);
+      if (!p || !v || v.length > 30 || !/^[-+]?[\dxc^+\-]+$/.test(v)) return null;
+
+      if (v == p.ans) {
+        AI.pending = null;
+        return "Betul! 🎉 Hebat, kamu sudah paham! Mau coba soal lain?";
+      }
+      return `Belum tepat, tapi jangan menyerah! 💪 Coba lagi dengan petunjuk ini:${steps([p.h])}Ketik hasil barumu, atau ketik "jawabannya" untuk melihat pembahasan.`;
+    }
+
+    /* ---- Basis pengetahuan penjelasan konsep ---- */
+    const KB = [
+      {
+        k: ["halo", "hai ", "selamat pagi", "siapa kamu"],
+        r: () => `Halo! 👋 Aku Asisten Pintar untuk matematika SMA. Tanya soal komposisi dan invers fungsi, lingkaran, suku banyak, turunan, integral, atau statistika. Ketik "topik" untuk daftar lengkap.`
+      },
+      {
+        k: ["terima kasih", "makasih", "thanks"],
+        r: () => "Sama-sama! 😊 Semangat belajarnya, ya. Kalau ada yang masih bingung, tanya lagi!"
+      },
+      {
+        k: ["topik", "bantuan", "apa saja"],
+        r: () => "<b>📚 Yang bisa kamu tanyakan:</b><br>• Fungsi komposisi dan invers<br>• Lingkaran<br>• Suku banyak (teorema sisa dan faktor)<br>• Turunan<br>• Integral<br>• Statistika<br>Contoh: <b>turunan 3x^4 - 2x</b> atau <b>mean 4, 6, 8</b>"
+      },
+      {
+        k: ["komposisi"],
+        r: () => `Fungsi komposisi berarti fungsi di dalam fungsi: <b>(f ∘ g)(x) = f(g(x))</b>.${steps([
+          ["Hitung g(x) dulu", "Hasilnya menjadi masukan untuk f."],
+          ["Ganti x pada f dengan g(x)", "Contoh: f(x) = 2x + 1 dan g(x) = x − 3, maka f(g(x)) = 2(x − 3) + 1 = 2x − 5."]
+        ])}Coba ketik: <b>f(x)=2x+1, g(x)=x-3 komposisi</b>.`
+      },
+      {
+        k: ["invers"],
+        r: () => `Invers membalik kerja fungsi.${steps([
+          ["Tulis y = f(x)", "Contoh: y = 3x − 6."],
+          ["Buat x sendiri", "x = {y + 6|3}."],
+          ["Tukar x dan y", "f⁻¹(x) = {x + 6|3}."]
+        ])}Coba ketik: <b>invers f(x)=3x-6</b>.`
+      },
+      {
+        k: ["lingkaran", "pusat"],
+        r: () => `Lingkaran dengan pusat (a, b) dan jari-jari r:${steps([
+          ["Bentuk baku", "(x − a)² + (y − b)² = r²"],
+          ["Bentuk umum", "x² + y² + Ax + By + C = 0 dengan pusat (−{A|2}, −{B|2})"]
+        ])}Coba ketik: <b>pusat (2,-1) jari-jari 3</b> atau <b>x^2+y^2-4x+6y-12=0 pusat</b>.`
+      },
+      {
+        k: ["suku banyak", "teorema", "faktor", "sisa"],
+        r: () => `Dua alat utama pada suku banyak:${steps([
+          ["Teorema sisa", "P(x) dibagi (x − k) bersisa P(k)."],
+          ["Teorema faktor", "Jika P(k) = 0, maka (x − k) adalah faktor."]
+        ])}Coba ketik: <b>sisa x^3-2x+5 dibagi (x-2)</b>.`
+      },
+      {
+        k: ["turunan", "menurunkan", "derivatif"],
+        r: () => `Aturan dasar turunan:${steps([
+          ["Pangkat jadi pengali", "axⁿ menjadi a · n · xⁿ⁻¹. Contoh: 3x⁴ menjadi 12x³."],
+          ["Aturan rantai", "Fungsi di dalam fungsi: turunan luar dikali turunan dalam."]
+        ])}Coba ketik: <b>turunan 3x^4 - 2x</b>.`
+      },
+      {
+        k: ["integral"],
+        r: () => `Integral adalah kebalikan turunan:${steps([
+          ["Naikkan pangkat", "axⁿ menjadi {a|n + 1}xⁿ⁺¹ + C."],
+          ["Integral tentu", "Hitung F(b) − F(a), tanpa konstanta C."]
+        ])}Coba ketik: <b>integral 6x^2+4x</b> atau <b>integral 3x^2 dari 0 sampai 2</b>.`
+      },
+      {
+        k: ["statistika", "mean", "median", "modus", "varians", "rata"],
+        r: () => `Ukuran data:${steps([
+          ["Mean", "Jumlah data dibagi banyak data."],
+          ["Median", "Nilai tengah setelah data diurutkan."],
+          ["Modus", "Nilai yang paling sering muncul."]
+        ])}Coba ketik: <b>mean 4, 6, 8, 10</b>.`
+      },
+      {
+        k: ["petunjuk"],
+        r: () => "Petunjuk umum 💡 Tulis rumusnya dulu, masukkan angka dengan teliti, lalu cek hasilnya. Kirim soalnya biar aku bantu langkah demi langkah!"
+      }
+    ];
+
+    /* ---- Analogi sederhana ---- */
+    const ANA = [
+      [/turun/, "Bayangkan speedometer mobil: jarak yang ditempuh berubah terhadap waktu, dan turunan adalah angka di speedometer pada satu saat tertentu. 🚗"],
+      [/integral/, "Integral itu menjumlahkan potongan-potongan kecil, misalnya menghitung total air yang masuk ke bak dari kecepatan keran yang berubah-ubah. 🚰"],
+      [/lingkaran|pusat/, "Tancapkan paku di papan (pusat), ikat tali sepanjang r, lalu putar pensil. Jejaknya adalah lingkaran. ✏️"],
+      [/komposisi/, "Seperti mesin berantai: keluaran mesin g langsung masuk ke mesin f. Hasil akhirnya adalah f ∘ g. ⚙️"],
+      [/invers/, "Invers itu seperti tombol undo: kalau f memakaikan sepatu, f⁻¹ melepasnya. 👟"],
+      [/sisa|suku banyak|faktor/, "Seperti membagi 17 permen ke 5 anak: tiap anak dapat 3 dan sisa 2. Teorema sisa langsung memberi sisanya tanpa membagi. 🍬"],
+      [/mean|median|modus|statistik|varians/, "Mean itu meratakan uang jajan semua teman agar sama banyak, median adalah teman yang berdiri di tengah barisan tinggi badan, modus adalah tinggi yang paling sering muncul. 📏"]
+    ];
+
+    const analog = () => {
+      const h = ANA.find((a) => a[0].test(AI.lastQ || ""));
+      return h
+        ? `Oke, versi mudahnya: ${h[1]} Mau coba soalnya? Tekan "Coba soal lain".`
+        : "Sebut topiknya dulu (misalnya turunan atau lingkaran), nanti kujelaskan dengan perumpamaan sederhana. 😊";
+    };
+
+    /* ---- Router jawaban ---- */
+    function reply(q) {
+      const l = q.toLowerCase();
+      let r;
+
+      if (!/jelaskan lebih sederhana/.test(l)) AI.lastQ = l;
+      if (/jelaskan lebih sederhana|lebih mudah dipahami|analogi/.test(l)) return analog();
+      if ((r = chk(q))) return r;
+
+      if (AI.pending && /petunjuk|hint|bantu/.test(l)) {
+        return `Petunjuk 💡${steps([AI.pending.h])}Lanjutkan sendiri, lalu ketik hasilnya. Aku cek! 😊`;
+      }
+      if (AI.pending && /jawaban|kunci|nyerah|pembahasan/.test(l)) {
+        const p = AI.pending;
+        AI.pending = null;
+        return p.sol || "Coba cek lagi langkahnya, ya.";
+      }
+
+      if (/soal lain|soal baru|latihan|kasih soal|coba soal/.test(l)) return newQ();
+      if ((r = solve(q))) return r;
+
+      // Cari entri basis pengetahuan dengan skor kata kunci tertinggi
+      let b = null;
+      let bs = 0;
+      for (const e of KB) {
+        let s = 0;
+        for (const k of e.k) if ((l + " ").includes(k)) s += k.length;
+        if (s > bs) {
+          bs = s;
+          b = e;
+        }
+      }
+
+      return b
+        ? b.r()
+        : 'Hmm, aku belum menemukan itu 🤔. Coba ketik <b>turunan 3x^4 - 2x</b>, <b>integral 6x^2+4x</b>, <b>invers f(x)=3x-6</b>, <b>f(x)=2x+1, g(x)=x-3 komposisi</b>, <b>pusat (2,-1) jari-jari 3</b>, <b>sisa x^3-2x+5 dibagi (x-2)</b>, atau <b>mean 4, 6, 8</b>.';
+    }
+    /*ENGEND*/
+
+    /* =========================================================
+       AI: ANTARMUKA CHAT
+       ========================================================= */
+    const MSG = document.getElementById("ms");
+    let hist = 1;
+    let busyAI = false;
+    const histInit = "Belum ada percakapan.";
+
+    function add(role, html) {
+      const em = $("#em");
+      if (em) em.remove();
+
+      const m = document.createElement("div");
+      m.className = "m " + (role == "u" ? "u" : "");
+      m.innerHTML =
+        role == "u"
+          ? `<div class="bb">${html}</div>`
+          : `<div class="bot">✨</div><div class="bb" style="flex:1">${html}</div>`;
+
+      MSG.appendChild(m);
+      MSG.scrollTop = MSG.scrollHeight;
+      return m;
+    }
+
+    const setBusy = (b) => {
+      $(".chh i").classList.toggle("busy", b);
+      $(".chh small").classList.toggle("t", b);
+      $(".chh small").textContent = b ? "Sedang menyusun jawaban..." : "Siap menemani belajarmu";
+      $("#sd").disabled = b;
+    };
+
+    function setChips() {
+      const list = AI.pending
+        ? ["Beri aku petunjuk", "Lihat jawabannya", "Coba soal lain"]
+        : ["Coba soal lain", "Jelaskan lebih sederhana", "Beri aku petunjuk"];
+
+      $("#chips").innerHTML = list
+        .map((x, i) => `<button style="animation-delay:${i * .08}s">${x}</button>`)
+        .join("");
+    }
+
+    async function askAI(q) {
+      if (S.ob) return toast("🔒 Asisten AI dikunci selama tantangan berlangsung.");
+      if (busyAI) return toast("Tunggu sebentar, asisten sedang menjawab ✨");
+
+      go("ai");
+      q = q.trim();
+      if (!q) return;
+
+      add("u", q.replace(/</g, "&lt;"));
+      busyAI = true;
+      setBusy(true);
+
+      const t = add("a", '<div class="ty"><i></i><i></i><i></i></div>');
+      const ans = reply(q);
+
+      await new Promise((r) => setTimeout(r, 700 + Math.min(1100, ans.length / 5)));
+
+      t.querySelector(".bb").innerHTML = ans;
+      MSG.scrollTop = MSG.scrollHeight;
+      busyAI = false;
+      setBusy(false);
+      setChips();
+
+      if (hist == 1) {
+        hist = 2;
+        $("#hist").innerHTML = `💬 ${q.slice(0, 28).replace(/</g, "&lt;")}<br><small>Baru saja</small>`;
+      }
+    }
+
+    // Saran awal di layar kosong chat
+    const SG = [
+      ["📐", "Turunkan 3x⁴ − 2x", "turunan 3x^4 - 2x"],
+      ["∫", "Integral 6x² + 4x", "integral 6x^2+4x"],
+      ["⭕", "Lingkaran pusat (2, −1)", "pusat (2,-1) jari-jari 3"],
+      ["📊", "Mean 4, 6, 8, 10", "mean 4, 6, 8, 10"]
+    ];
+
+    function seed() {
+      AI.pending = null;
+      MSG.innerHTML = `<div class="em" id="em">
+        <div class="orb">✨</div>
+        <h2>Halo, ${P[0][0]}! Mau belajar apa hari ini?</h2>
+        <p>Ketik soal matematika SMA-mu, atau pilih salah satu contoh di bawah. Aku jelaskan langkah demi langkah.</p>
+        <div class="sg">${SG.map(([i, l, q], k) =>
+          `<button data-q="${q}" style="animation-delay:${.25 + k * .1}s">${i} ${l}</button>`
+        ).join("")}</div>
+      </div>`;
+
+      MSG.onclick = (e) => {
+        const b = e.target.closest("[data-q]");
+        if (b) askAI(b.dataset.q);
+      };
+      setChips();
+    }
+
+    const send = () => {
+      const v = $("#ci").value;
+      $("#ci").value = "";
+      askAI(v);
+    };
+
+    $("#sd").onclick = send;
+    $("#ci").onkeydown = (e) => {
+      if (e.key == "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        send();
+      }
+    };
+    $("#chips").onclick = (e) => {
+      if (e.target.tagName == "BUTTON") askAI(e.target.textContent);
+    };
+    $$(".qp").forEach((b) => (b.onclick = () => askAI(b.textContent)));
+
+    // Lampiran foto (belum bisa dibaca, hanya ditampilkan)
+    $("#att").onclick = () => {
+      if (S.ob) return toast("🔒 Asisten AI dikunci selama tantangan berlangsung.");
+      $("#fi").click();
+    };
+
+    $("#fi").onchange = (e) => {
+      const f = e.target.files[0];
+      e.target.value = "";
+      if (!f) return;
+      if (!f.type.startsWith("image/")) return toast("Pilih file gambar, ya.");
+      if (busyAI) return toast("Tunggu sebentar, asisten sedang menjawab ✨");
+
+      const r = new FileReader();
+      r.onload = async () => {
+        busyAI = true;
+        setBusy(true);
+
+        add("u", `<img src="${r.result}" alt="Foto soal" style="max-width:220px;width:100%;border-radius:10px;display:block;margin-bottom:6px">Foto soalku`);
+        const t = add("a", '<div class="ty"><i></i><i></i><i></i></div>');
+
+        await new Promise((x) => setTimeout(x, 1200));
+
+        t.querySelector(".bb").innerHTML = `Fotonya sudah kuterima 📷 Tapi aku belum bisa membaca tulisan di dalam gambar. Ketik soalnya saja, misalnya <b>turunan 3x^4 - 2x</b>, nanti kuselesaikan langkah demi langkah.`;
+        MSG.scrollTop = MSG.scrollHeight;
+        busyAI = false;
+        setBusy(false);
+        setChips();
+      };
+      r.readAsDataURL(f);
+    };
+
+    $("#nc").onclick = () => {
+      if (busyAI) return;
+      seed();
+      hist = 1;
+      $("#hist").innerHTML = histInit;
+    };
+
+    /* =========================================================
+       RANGKUMAN MATERI SMA
+       ========================================================= */
+    const TS = [
+      ["Fungsi Komposisi dan Invers", "∘"],
+      ["Lingkaran", "◯"],
+      ["Suku Banyak", "xⁿ"],
+      ["Turunan", "f′"],
+      ["Integral", "∫"],
+      ["Statistika", "▥"]
+    ];
+
+    // M(judul, penjelasan, rumus, contoh, peringatan, ...[soal, [opsi (pertama = benar)]])
+    const M = (t, p, fm, ex, w, ...qs) => ({
+      t, p, fm, ex, w,
+      q: qs.map(([e, o]) => shq({ e, o, a: 0 }))
+    });
+
+    const MAT = [
+      M("Pengertian fungsi komposisi",
+        "Fungsi komposisi menggabungkan dua fungsi: hasil g(x) menjadi masukan bagi f. Urutan pengerjaannya dari fungsi paling dalam.",
+        "(f ∘ g)(x) = f(g(x))",
+        "f(x) = 2x + 1 dan g(x) = x − 3.<br>(f ∘ g)(x) = 2(x − 3) + 1 = 2x − 5.",
+        "(f ∘ g)(x) tidak sama dengan (g ∘ f)(x). Perhatikan urutannya.",
+        ["(g ∘ f)(x) = ? jika f(x) = 2x + 1 dan g(x) = x − 3", ["2x − 2", "2x − 5", "2x + 4"]],
+        ["(f ∘ g)(2) = ? jika f(x) = x² dan g(x) = x + 1", ["9", "5", "7"]]),
+
+      M("Fungsi invers",
+        "Invers membalik kerja fungsi. Tulis y = f(x), buat x sendiri, lalu tukar x dengan y.",
+        "f(x) = ax + b → f⁻¹(x) = {x − b|a}",
+        "f(x) = 3x − 6.<br>y = 3x − 6 → x = {y + 6|3}, jadi f⁻¹(x) = {x + 6|3}.",
+        "f⁻¹(x) bukan {1|f(x)}. Pangkat −1 di sini menandakan invers.",
+        ["f⁻¹(x) = ? jika f(x) = 2x + 4", ["{x − 4|2}", "{x + 4|2}", "2x − 4"]],
+        ["f⁻¹(8) = ? jika f(x) = x − 5", ["13", "3", "−3"]]),
+
+      M("Persamaan lingkaran",
+        "Lingkaran adalah kumpulan titik yang berjarak sama (r) dari pusat (a, b).",
+        "(x − a)² + (y − b)² = r²",
+        "Pusat (2, −1) dan r = 3.<br>(x − 2)² + (y + 1)² = 9.",
+        "Tanda di dalam kurung berlawanan dengan koordinat pusat.",
+        ["Pusat (0, 0) dan r = 4. Persamaannya?", ["x² + y² = 16", "x² + y² = 4", "x² + y² = 8"]],
+        ["Pusat (−3, 2) dan r = 1. Persamaannya?", ["(x + 3)² + (y − 2)² = 1", "(x − 3)² + (y + 2)² = 1", "(x + 3)² + (y − 2)² = 2"]]),
+
+      M("Bentuk umum lingkaran",
+        "Dari bentuk x² + y² + Ax + By + C = 0, pusat dan jari-jari bisa dicari tanpa menjabarkan ulang.",
+        "Pusat (−{A|2}, −{B|2}) dan r = √({A²|4} + {B²|4} − C)",
+        "x² + y² − 4x + 6y − 12 = 0.<br>Pusat (2, −3), r² = 4 + 9 + 12 = 25, jadi r = 5.",
+        "Pusat memakai −{A|2} dan −{B|2}, perhatikan tandanya.",
+        ["Pusat dari x² + y² − 6x + 4y − 12 = 0?", ["(3, −2)", "(−3, 2)", "(6, −4)"]],
+        ["Jari-jari dari x² + y² − 2x − 3 = 0?", ["2", "4", "1"]]),
+
+      M("Teorema sisa",
+        "Jika P(x) dibagi (x − k), maka sisanya adalah P(k). Tidak perlu pembagian panjang.",
+        "P(x) dibagi (x − k) → sisa = P(k)",
+        "P(x) = x³ − 2x + 5 dibagi (x − 2).<br>P(2) = 8 − 4 + 5 = 9.",
+        "Untuk pembagi (x + 3), nilai k adalah −3.",
+        ["Sisa x² + 3x − 4 dibagi (x − 1)?", ["0", "−4", "4"]],
+        ["Sisa 2x² − x + 1 dibagi (x + 1)?", ["4", "2", "0"]]),
+
+      M("Teorema faktor",
+        "Jika P(k) = 0, maka (x − k) adalah faktor dan k adalah akar. Coba k dari pembagi suku tetap.",
+        "P(k) = 0 ⇔ (x − k) faktor",
+        "P(x) = x² − 5x + 6.<br>P(2) = 4 − 10 + 6 = 0, jadi P(x) = (x − 2)(x − 3).",
+        "Coba k dari pembagi suku tetap, misalnya ±1, ±2, ±3, ±6.",
+        ["Faktor dari x² − x − 6?", ["(x − 3)", "(x + 3)", "(x − 6)"]],
+        ["(x − 1) faktor x² + px − 6. Nilai p?", ["5", "−5", "6"]]),
+
+      M("Aturan dasar turunan",
+        "Turunan menyatakan laju perubahan sekaligus gradien garis singgung. Pangkat jadi pengali, lalu berkurang 1.",
+        "f(x) = axⁿ → f′(x) = a · n · xⁿ⁻¹",
+        "f(x) = 3x⁴ − 2x.<br>f′(x) = 12x³ − 2.",
+        "Turunan konstanta adalah 0.",
+        ["Turunan dari 5x³ + 2x?", ["15x² + 2", "5x² + 2", "15x³ + 2"]],
+        ["Gradien garis singgung y = x² di x = 3?", ["6", "9", "3"]]),
+
+      M("Aturan rantai dan nilai stasioner",
+        "Untuk fungsi di dalam fungsi, kalikan turunan luar dengan turunan dalam. Nilai stasioner muncul saat f′(x) = 0.",
+        "[f(g(x))]′ = f′(g(x)) · g′(x)",
+        "f(x) = (2x + 1)³.<br>f′(x) = 3(2x + 1)² · 2 = 6(2x + 1)².",
+        "Jangan lupa mengalikan dengan turunan bagian dalam.",
+        ["Turunan dari (3x − 1)²?", ["6(3x − 1)", "2(3x − 1)", "3(3x − 1)"]],
+        ["Nilai stasioner f(x) = x² − 6x + 5 terjadi di x = ?", ["3", "6", "−3"]]),
+
+      M("Integral tak tentu",
+        "Integral adalah kebalikan turunan. Pangkat naik 1, lalu bagi dengan pangkat baru.",
+        "∫ axⁿ dx = {a|n + 1} xⁿ⁺¹ + C",
+        "∫ (6x² + 4x) dx = 2x³ + 2x² + C.",
+        "Setiap integral tak tentu butuh konstanta C.",
+        ["∫ 8x³ dx = ?", ["2x⁴ + C", "8x⁴ + C", "24x² + C"]],
+        ["∫ (2x + 3) dx = ?", ["x² + 3x + C", "2x² + 3x + C", "x² + 3 + C"]]),
+
+      M("Integral tentu dan luas",
+        "Integral tentu memberi luas daerah di bawah kurva. Hitung F(b) lalu kurangi F(a); konstanta C tidak dipakai.",
+        "∫ₐᵇ f(x) dx = F(b) − F(a)",
+        "∫₀² 3x² dx = [x³] dari 0 sampai 2 = 8 − 0 = 8.",
+        "Tulis F(b) − F(a), bukan sebaliknya.",
+        ["∫₁³ 2x dx = ?", ["8", "6", "9"]],
+        ["∫₀³ x² dx = ?", ["9", "27", "3"]]),
+
+      M("Ukuran pemusatan data",
+        "Mean adalah rata-rata, median adalah nilai tengah setelah diurutkan, modus adalah nilai yang paling sering muncul.",
+        "Mean = {jumlah semua data|banyak data}",
+        "Data 4, 6, 8, 10, 12.<br>Mean = 40 ÷ 5 = 8, median = 8, tidak ada modus.",
+        "Urutkan data dulu sebelum mencari median.",
+        ["Mean dari 2, 4, 6, 8?", ["5", "4", "6"]],
+        ["Median dari 3, 5, 7, 9, 11, 13?", ["8", "7", "9"]]),
+
+      M("Ukuran penyebaran data",
+        "Jangkauan adalah data terbesar dikurangi terkecil. Varians adalah rata-rata kuadrat selisih data dari mean.",
+        "s² = {Σ(xᵢ − x̄)²|n}",
+        "Data 2, 4, 6.<br>Mean = 4, varians = {4 + 0 + 4|3} = {8|3}.",
+        "Jangkauan memakai selisih, bukan jumlah.",
+        ["Jangkauan dari 3, 9, 5, 12?", ["9", "12", "15"]],
+        ["Varians dari 1, 3, 5 (populasi)?", ["{8|3}", "{4|3}", "2"]])
+    ];
+
+    // State halaman rangkuman
+    const R = {
+      done: [],     // indeks materi yang sudah dipahami
+      mat: 0,       // materi aktif
+      open: 0,      // topik yang sedang terbuka
+      tab: "r",     // tab aktif (r = ringkasan, c = contoh, l = latihan)
+      zq: null,     // jawaban kuis terpilih
+      zd: false,    // kuis sudah diperiksa
+      bm: false     // bookmark
+    };
+
+    function drawSide() {
+      const f = $("#ss").value.toLowerCase();
+      const L = R.done.length;
+      const p = Math.round((L / 12) * 100);
+
+      $("#pct").textContent = p + "%";
+      $("#pbi").style.width = p + "%";
+      $("#lc").textContent = L;
+
+      $("#side").innerHTML =
+        TS.map((t, i) => ({ t, i }))
+          .filter((x) =>
+            x.t[0].toLowerCase().includes(f) ||
+            MAT.slice(2 * x.i, 2 * x.i + 2).some((m) => m.t.toLowerCase().includes(f))
+          )
+          .map(({ t, i }) => {
+            const n = R.done.filter((j) => j >> 1 == i).length;
+            const o = R.open == i;
+
+            return `<div class="tc ${o ? "on" : ""}" data-i="${i}">
+              <b>${t[1]} &nbsp;${t[0]}</b>
+              <small>${n} dari 2 materi dipahami</small>
+              ${o
+                ? MAT.slice(2 * i, 2 * i + 2).map((s, k) => {
+                    const j = 2 * i + k;
+                    return `<button class="sm ${j == R.mat ? "on" : ""}" data-j="${j}">${R.done.includes(j) ? "✔" : j == R.mat ? "▶" : "○"} ${s.t}</button>`;
+                  }).join("")
+                : ""}
+            </div>`;
+          })
+          .join("") || '<small class="sub">Tidak ditemukan.</small>';
+    }
+
+    $("#ss").oninput = drawSide;
+
+    // Pilih materi: kembali ke tab ringkasan lalu gambar ulang
+    const pick = () => {
+      R.tab = "r";
+      $$("#tabs button").forEach((x) => x.classList.toggle("on", x.dataset.t == "r"));
+      drawAll();
+    };
+
+    $("#side").onclick = (e) => {
+      const s = e.target.closest(".sm");
+      if (s) {
+        R.mat = +s.dataset.j;
+        return pick();
+      }
+
+      const t = e.target.closest(".tc");
+      if (!t) return;
+
+      const i = +t.dataset.i;
+      if (R.open == i) {
+        R.open = -1;
+      } else {
+        R.open = i;
+        R.mat = 2 * i;
+      }
+      pick();
+    };
+
+    const exH = (m) => `<div class="ex"><b>Contoh soal</b><br>${F(m.ex)}</div>`;
+
+    function drawBody() {
+      const m = MAT[R.mat];
+      const t = R.tab;
+
+      if (t == "c") {
+        $("#body").innerHTML = `<div class="sec"><h4>Contoh soal</h4>${exH(m)}</div>`;
+      } else if (t == "l") {
+        $("#body").innerHTML = `<div class="sec"><h4>Latihan mini</h4><p>Pilih jawaban, hasil langsung muncul.</p>${m.q
+          .map((q, k) => `<div class="ex" data-k="${k}"><b>${k + 1}. ${F(q.e)}</b><div class="qo">${q.o
+            .map((o, i) => `<button data-i="${i}">${F(o)}</button>`)
+            .join("")}</div></div>`)
+          .join("")}</div>`;
+      } else {
+        $("#body").innerHTML = `<div class="sec"><h4><em>01</em>Konsep utama</h4><p>${F(m.p)}</p><div class="fm">${F(m.fm)}</div></div>
+          <div class="sec"><h4><em>02</em>Coba lihat contohnya</h4>${exH(m)}</div>`;
+      }
+    }
+
+    function drawAll() {
+      const m = MAT[R.mat];
+      const ti = R.mat >> 1;
+
+      $("#mt").textContent = m.t;
+      $("#bc").textContent = "Rangkuman Materi › " + TS[ti][0] + " › Materi " + ((R.mat % 2) + 1);
+      $("#bt1").textContent = TS[ti][0];
+      $("#bt2").textContent = R.mat % 2 ? "Lanjutan" : "Dasar";
+      $("#wt").innerHTML = F(m.w);
+      $("#qe").innerHTML = F(m.q[0].e);
+      $("#mq").innerHTML = m.q[0].o.map((o, i) => `<button data-i="${i}">${F(o)}</button>`).join("");
+      $("#mf").innerHTML = "";
+      R.zq = null;
+      R.zd = false;
+
+      $("#dn").textContent = R.done.includes(R.mat) ? "✔ Sudah dipahami" : "✔ Tandai sudah dipahami";
+      $("#nx").textContent = MAT[(R.mat + 1) % 12].t + " →";
+
+      drawSide();
+      drawBody();
+    }
+
+    $("#tabs").onclick = (e) => {
+      const b = e.target.closest("button");
+      if (!b) return;
+      R.tab = b.dataset.t;
+      $$("#tabs button").forEach((x) => x.classList.toggle("on", x == b));
+      drawBody();
+    };
+
+    // Latihan mini
+    $("#body").onclick = (e) => {
+      const b = e.target.closest(".qo button");
+      const w = e.target.closest("[data-k]");
+      if (!b || !w || w.querySelector(".good")) return;
+
+      const q = MAT[R.mat].q[+w.dataset.k];
+      const i = +b.dataset.i;
+
+      b.classList.add(i == q.a ? "good" : "bad");
+      toast(i == q.a ? "Benar! 🎉" : "Belum tepat, coba lagi.");
+    };
+
+    // Kuis "Uji pemahamanmu"
+    $("#mq").onclick = (e) => {
+      const b = e.target.closest("button");
+      if (!b || R.zd) return;
+
+      R.zq = +b.dataset.i;
+      $$("#mq button").forEach((x) => (x.className = ""));
+      b.classList.add("s");
+      $("#mf").innerHTML = "";
+    };
+
+    $("#mc").onclick = () => {
+      if (R.zd) return;
+      if (R.zq == null) return toast("Pilih jawaban dulu, ya.");
+
+      const q = MAT[R.mat].q[0];
+      const g = R.zq == q.a;
+      R.zd = true;
+
+      $$("#mq button").forEach((x, i) => {
+        x.className = i == q.a ? "good" : i == R.zq ? "bad" : "";
+      });
+
+      $("#mf").innerHTML = `<div class="fb ${g ? "good" : "bad"}">${g ? "Tepat! 🎉" : "Belum tepat. Jawaban benar: " + F(q.o[q.a]) + "."}</div>`;
+
+      if (g) {
+        S.pts += 5;
+        $("#pts").textContent = S.pts;
+      }
+    };
+
+    $("#dn").onclick = () => {
+      if (R.done.includes(R.mat)) {
+        R.done = R.done.filter((x) => x != R.mat);
+        toast("Tanda dipahami dihapus");
+      } else {
+        R.done.push(R.mat);
+        toast("Materi ditandai sudah dipahami ✔");
+      }
+      drawAll();
+    };
+
+    $("#nx").onclick = () => {
+      R.mat = (R.mat + 1) % 12;
+      R.open = R.mat >> 1;
+      pick();
+      scrollTo(0, 0);
+    };
+
+    $("#bk").onclick = (e) => {
+      R.bm = !R.bm;
+      e.target.style.opacity = R.bm ? 1 : .5;
+      e.target.textContent = R.bm ? "🔖" : "🏷️";
+      toast(R.bm ? "Materi disimpan" : "Simpanan dihapus");
+    };
+
+    /* =========================================================
+       MODAL UMUM, FOOTER, & EVENT LAIN
+       ========================================================= */
+    const modal = (t, h) => {
+      $("#gt").textContent = t;
+      $("#gb").innerHTML = h;
+      $("#gm").classList.add("show");
+    };
+    const closeM = () => $("#gm").classList.remove("show");
+
+    $("#gx").onclick = closeM;
+    $("#gm").onclick = (e) => {
+      if (e.target.id == "gm") closeM();
+    };
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key == "Escape") {
+        closeM();
+        $("#mo").classList.remove("show");
+      }
+    });
+
+    $("#gb").onclick = (e) => {
+      const b = e.target.closest("[data-act]");
+      if (!b) return;
+      closeM();
+      if (b.dataset.act == "how") $("#mo").classList.add("show");
+      else go("ai");
+    };
+
+    const FOOT = {
+      "Panduan belajar": `<ol>
+        <li>Mulai dari Rangkuman Materi: baca konsep, rumus, lalu contohnya.</li>
+        <li>Kerjakan Latihan mini dan uji pemahamanmu untuk mengunci konsep.</li>
+        <li>Main Tangga Pintar untuk melatih soal secara seru bersama teman.</li>
+        <li>Bingung? Tanya Asisten Pintar. Ia terkunci saat tantangan permainan berlangsung.</li>
+        <li>Tandai materi yang sudah paham agar progresmu terlihat.</li>
+      </ol>`,
+      "Butuh bantuan?": `<p class="sub" style="line-height:1.6">Pertanyaan yang sering muncul:</p>
+        <ol>
+          <li>Asisten tidak bisa dibuka? Selesaikan dulu tantangan di papan permainan.</li>
+          <li>Ingin mengganti pemain? Buka menu profil di kanan atas, lalu pilih Ganti pemain.</li>
+          <li>Ingin mengulang? Pilih Atur ulang permainan di menu profil.</li>
+        </ol>
+        <div style="display:flex;gap:10px;margin-top:12px">
+          <button class="btn" data-act="how">❔ Cara bermain</button>
+          <button class="btn" data-act="ai">✨ Tanya Asisten</button>
+        </div>`
+    };
+
+    $$("footer button").forEach((b) => (b.onclick = () => modal(b.textContent, FOOT[b.textContent])));
+
+    $(".logo").onclick = () => go("game");
+    $("#av").onclick = () => $("#dd").classList.toggle("show");
+
+    $(".pts").onclick = () =>
+      modal("Poinmu", `<p class="sub" style="line-height:1.6">Kamu punya <b style="color:var(--tx)">${S.pts} poin</b>. Cara menambah poin:</p>
+        <ol>
+          <li>+10 poin untuk tiap jawaban benar di permainan.</li>
+          <li>+5 poin untuk uji pemahaman yang benar di Rangkuman Materi.</li>
+        </ol>`);
+
+    // Kartu rekomendasi materi di halaman AI
+    document.addEventListener("click", (e) => {
+      const c = e.target.closest("[data-m]");
+      if (c && !S.ob) {
+        R.mat = +c.dataset.m;
+        R.open = R.mat >> 1;
+        pick();
+      }
+    });
+
+    /* =========================================================
+       INISIALISASI
+       ========================================================= */
+    drawAll();
+    drawTopics();
+    seed();
+    reset();
+    openSetup();
+  </script>
+</body>
+
+</html>
